@@ -11,7 +11,7 @@ public class AverageCalculator {
         scores[4] = 64;
         //float average = (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / 5.0f;
         float average = (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / (float) scores.length;
-        System.out.println("Average = "+average);
+        System.out.println("Average = " + average);
 	}
 
 }
