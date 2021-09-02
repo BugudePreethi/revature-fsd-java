@@ -62,8 +62,9 @@ public class MenuDisplayingUsingLoop {
 					break;
 				case 4:      //Entering into infinite loop
 					System.out.println("Exit");
-					option = scanner.nextInt();
-					break;
+					//option = scanner.nextInt();
+					System.exit(0);
+					//break;
 				}
 			}
 			
