@@ -59,15 +59,16 @@ public class MenuDisplayingUsingLoop {
 					System.out.println("4. Exit");
 					System.out.print("Choose an Option : ");
 					option = scanner.nextInt();
-					scanner.close();
 					break;
 				case 4:      //Entering into infinite loop
 					System.out.println("Exit");
+					option = scanner.nextInt();
 					break;
 				}
 			}
 			
 		}
+		scanner.close();
 	}
 
 }
