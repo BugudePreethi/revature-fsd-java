@@ -14,6 +14,14 @@ public class Transaction {    //Here Transaction is the data type we created
 		System.out.printf("%4c %12.2f %8.2f\n", type, amount, balance);
 	}
 	
+	public char getType() {
+		return type;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
 	// transaction is the object created using the class Transaction
 	public static void main(String args[]){
 		Transaction transaction1 = new Transaction('W', 2000);//Object is created using "Transaction" class
