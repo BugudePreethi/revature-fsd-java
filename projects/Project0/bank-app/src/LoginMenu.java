@@ -12,12 +12,14 @@ public class LoginMenu {
 		System.out.print("Choose an Option : ");
 		int input = scanner.nextInt();		
 		if (input == 1) {
-			System.out.println("Enter Username");
-			String c_input_name = scanner.nextLine();
-			System.out.println("Enter Password");
-			String c_input_password = scanner.nextLine();
-			
 			System.out.println("Login");	
+			System.out.print("Enter Username : ");
+			String c_input_name = scanner.next();
+			// scanner.readLine();
+			System.out.print("Enter Password : ");
+			String c_input_password = scanner.next();
+			//String c_input_password = scanner.nextLine();
+			scanner.close();
 			System.out.println("\nLogin Successfull");
 			System.out.println("\nCustomer Menu");
 			System.out.println("==============");
