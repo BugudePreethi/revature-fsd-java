@@ -22,9 +22,9 @@ public class task2 {
 		personList.add(person4);
 		personList.add(person5);
 		
-		personList.stream()
-		.reduce(e -> e.getAge()).collect(Collectors.toList())
-		.forEach(System.out::println);
-	}
+		float total = personList.stream()
+		.map(e -> e.getAge()).reduce(0, (a,b) -> a + b);
+		System.out.println("\n Average age is : " + total / personList.size());
+	}  
 
 }

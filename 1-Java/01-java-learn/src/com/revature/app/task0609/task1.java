@@ -29,7 +29,7 @@ public class task1 {
 		scanner.close();
 		personList.stream()
 			.filter(e -> e.getId() == data).collect(Collectors.toList())
-			.forEach(System.out::println);
+			.forEach(p -> System.out.println(p.getName()));
 	}
 
 }
