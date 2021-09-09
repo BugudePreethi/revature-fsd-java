@@ -1,9 +1,10 @@
 package com.revature.bankapp.menu;
 
 import java.util.ArrayList;
-//import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+//import com.revature.bankapp.main.BankApp;
 
 public abstract class Menu {
 	
@@ -18,13 +19,14 @@ public abstract class Menu {
 	}
 	
 	//Adding the items to list
-	public void addMenuItems(String menuItemName) {
+	public void addMenuItem(String menuItemName) {
 		menuItems.add(menuItemName);
 	}
 	
 	//We can display menu using this function
 	public void displayMenu() {
-		System.out.println("Menu");
+		System.out.println("****");
+		System.out.println(name);
 		System.out.println("****");
 		for (int i = 0; i < menuItems.size(); i++) {
 			System.out.println((i + 1) + "." + menuItems.get(i));
@@ -32,26 +34,27 @@ public abstract class Menu {
 		System.out.print("\nEnter your choice : ");
 	}
 	
-	//Task to select valid option
+	//int validOption = 0;
 	public void captureSelection() {
-		int validOption = 0;
-		while(validOption == 0) {
-			try {
+		/*while(validOption == 0) {
+			try {*/
 				Scanner scanner = new Scanner(System.in);
 				selection = Integer.parseInt(scanner.nextLine());
 				
-				if(selection > 0 && selection <=menuItems.size()) {
-					validOption = 1;//Loop doesnot terminate here
+				/*if(selection > 0 && selection <=menuItems.size()) {
+					validOption = 1;
 				} else {
 					System.out.println("Please select the option between 1 - " + menuItems.size() + "\n");
-					displayMenuAndCaptureSelection();
+					displayMenu();
+					captureSelection();
 				}
 				
 			} catch(NumberFormatException e) {
 				System.out.println("Please select a valid option");
-				displayMenuAndCaptureSelection();
+				displayMenu();
+				captureSelection();
 			}
-		}
+		}*/
 	}
 	
 	//Method to display action in order
@@ -60,8 +63,7 @@ public abstract class Menu {
 		captureSelection();
 		handleAction();
 	}
-	
-	//This groups all the actions together
+
 	abstract void handleAction();
 
 }
