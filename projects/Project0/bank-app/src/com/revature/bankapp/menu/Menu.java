@@ -24,9 +24,9 @@ public abstract class Menu {
 	
 	//We can display menu using this function
 	public void displayMenu() {
-		System.out.println("****");
+		System.out.println("***********");
 		System.out.println(name);
-		System.out.println("****");
+		System.out.println("***********");
 		for (int i = 0; i < menuItems.size(); i++) {
 			System.out.println((i + 1) + "." + menuItems.get(i));
 		}
@@ -50,13 +50,15 @@ public abstract class Menu {
 				} else {
 					System.out.println("Select value between  1 - " + menuItems.size() + "\n");
 				}
-			} catch(NumberFormatException e) {
+			} catch(NumberFormatException e){
 				System.out.println("Please enter valid number");
 			}
 		}
+		//displayMenu();
+		//captureSelection();
 		handleAction();
 	}
-	
+
 	abstract void handleAction();
 
 }

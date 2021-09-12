@@ -1,10 +1,10 @@
 package com.revature.bankapp.main;
 
 import com.revature.bankapp.menu.MainMenu;
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class BankApp {
-    //private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
     
     
 	public static void main(String[] args) {
@@ -14,8 +14,8 @@ public class BankApp {
 		
 	}
 	
-	/*public static Scanner getScanner() {
+	public static Scanner getScanner() {
 		return scanner;
-	}*/
+	}
 
 }

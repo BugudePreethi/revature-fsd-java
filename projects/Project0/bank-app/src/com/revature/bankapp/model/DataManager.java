@@ -8,7 +8,7 @@ public class DataManager {
 	private static List<Customer> customerList = new ArrayList<>();
 	
 	static {
-		customerList.add(new Customer("abc", "xyz", "abcxyz", "123"));
+		customerList.add(new Customer("John", "Smith", "john", "123"));
 	}
 	
 	public static void addCustomer(Customer customer) {

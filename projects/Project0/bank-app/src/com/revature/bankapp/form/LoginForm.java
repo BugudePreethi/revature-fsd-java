@@ -1,8 +1,8 @@
 package com.revature.bankapp.form;
 
+import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.model.Customer;
 import com.revature.bankapp.model.DataManager;
-import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.menu.CustomerMainMenu;
 import java.util.Scanner;
 
@@ -13,6 +13,11 @@ public class LoginForm extends Form {
 		super(name);
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+
 	@Override
 	public void captureData() {
 		Scanner scanner = BankApp.getScanner();
@@ -21,6 +26,7 @@ public class LoginForm extends Form {
 		
 		System.out.print("Password : ");
 		password = scanner.nextLine();
+		
 		
 	}
 
