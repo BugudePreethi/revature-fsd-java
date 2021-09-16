@@ -1,23 +1,17 @@
 package com.revature.bankapp.form;
 
-import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.model.Customer;
 import com.revature.bankapp.model.DataManager;
+import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.menu.CustomerMainMenu;
 import java.util.Scanner;
 
 public class LoginForm extends Form {
 	private String email;
 	private String password;
-	private static int currentCustomer;
 	public LoginForm(String name) {
 		super(name);
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
 
 	@Override
 	public void captureData() {
@@ -27,7 +21,6 @@ public class LoginForm extends Form {
 		
 		System.out.print("Password : ");
 		password = scanner.nextLine();
-		
 		
 	}
 
@@ -42,7 +35,6 @@ public class LoginForm extends Form {
 			CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
 			menu.displayMenuAndCaptureSelection();
 			System.out.println("Welcome " + customer.getFirstName());
-			currentCustomer = 1;
 		} else {
 			System.out.println("Invalid Login. Incorrect Password");
 		}
