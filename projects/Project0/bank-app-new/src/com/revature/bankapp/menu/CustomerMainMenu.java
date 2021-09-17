@@ -1,8 +1,7 @@
 package com.revature.bankapp.menu;
 
-import java.util.Scanner;
-
-import com.revature.bankapp.main.BankApp;
+import com.revature.bankapp.form.CreateAccountForm;
+import com.revature.bankapp.form.ViewAccountForm;
 
 public class CustomerMainMenu extends Menu{
 	
@@ -23,19 +22,16 @@ public class CustomerMainMenu extends Menu{
 		System.out.print("\n Enter your choice : ");
 	}
 	@Override
-	void handleAction() {
-		Scanner scanner = BankApp.getScanner();
+	void handleAction() {	
 		switch (selection) {
 		case 1:
-			System.out.println("**************");
-			System.out.println("Create Account");
-			System.out.println("**************\n");
-			
-			System.out.print("balance : ");
-			
-			System.out.print("Account Number : ");
-			
-						
+			CreateAccountForm createAccountForm = new CreateAccountForm("Create Account");
+			createAccountForm.captureDataAndPerformAction();
+			break;
+		/*case 2:
+			ViewAccountForm viewAccountForm = new ViewAccountForm("View Accounts");
+			viewAccountForm.captureDataAndPerformAction();
+			break;*/
 		}
 	}
 }

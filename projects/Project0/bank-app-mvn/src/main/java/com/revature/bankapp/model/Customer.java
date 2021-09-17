@@ -1,6 +1,6 @@
 package com.revature.bankapp.model;
 
-//import java.util.List;
+import java.util.List;
 
 public class Customer {
 	private int id;
@@ -8,7 +8,18 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String password;
-	//private List<Account> accountList;
+	private List<Account> accountList;
+	
+	public Customer() {		
+	}
+	
+	public Customer(String firstName, String lastName, String email, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
 	
 	public String getFirstName() {
 		return firstName;
@@ -37,24 +48,21 @@ public class Customer {
 	public int getId() {
 		return id;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public List<Account> getAccountList() {
+		return accountList;
+	}
+	public void setAccountList(List<Account> accountList) {
+		this.accountList = accountList;
+	}
 	
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + "]";
 	}
-	
-	//Counter is a unique identifier for each object
-	//private static long counter = 0;
-	
-	/*public Customer(String firstName, String lastName, String email, String password) {
-		super();
-		counter++;
-		this.id = counter;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-	}*/
 
 }

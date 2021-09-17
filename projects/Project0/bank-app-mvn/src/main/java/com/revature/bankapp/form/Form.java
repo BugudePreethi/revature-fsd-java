@@ -12,7 +12,7 @@ public abstract class Form {
 	public void displayTitle() {
 		System.out.println("\n*****");
 		System.out.println(name);
-		System.out.println("****");
+		System.out.println("*****");
 	}
 	
 	public void captureDataAndPerformAction() {

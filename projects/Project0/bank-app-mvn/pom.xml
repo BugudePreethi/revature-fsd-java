@@ -4,4 +4,15 @@
   <artifactId>bank-app-mvn</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>bank-app-mvn</name>
+  <properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.26</version>
+		</dependency>
+	</dependencies>
 </project>

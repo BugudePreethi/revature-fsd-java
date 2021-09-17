@@ -1,10 +1,13 @@
 package com.revature.bankapp.form;
 
-import com.revature.bankapp.model.Customer;
-import com.revature.bankapp.model.DataManager;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+import com.revature.bankapp.dao.CustomerDao;
+import com.revature.bankapp.dao.impl.CustomerDaoImpl;
 import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.menu.CustomerMainMenu;
-import java.util.Scanner;
+import com.revature.bankapp.model.Customer;
 
 public class LoginForm extends Form {
 	private String email;
@@ -26,12 +29,21 @@ public class LoginForm extends Form {
 
 	@Override
 	public void action() {
-		Customer customer = DataManager.getCustomerByEmail(email);
+		
+		CustomerDao dao = new CustomerDaoImpl();
+		Customer customer = null;
+		try {
+			customer = dao.getCustomerByEmail(email);
+			
+		} catch (SQLException e) {
+			System.out.println("Failed getting Customer.");
+		}
 		if(customer == null) {
 			System.out.println("Invalid Login. Please check your email");
 		}
 		else if(customer.getPassword().equals(password)) {
 			System.out.println("Login Successful.");
+			BankApp.setCurrentCustomer(customer);
 			CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
 			menu.displayMenuAndCaptureSelection();
 			System.out.println("Welcome " + customer.getFirstName());

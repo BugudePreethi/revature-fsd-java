@@ -7,14 +7,6 @@ public class DataManager {
 	//Static is used to avoid multiple instances of customer.
 	private static List<Customer> customerList = new ArrayList<>();
 	
-	static {
-		customerList.add(new Customer("abc", "xyz", "abcxyz", "123"));
-	}
-	
-	public static void addCustomer(Customer customer) {
-		customerList.add(customer);
-	}
-	
 	public static Customer getCustomerByEmail(String email) {
 		for (Customer customer : customerList) {
 			if (customer.getEmail().equals(email)) {

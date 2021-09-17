@@ -1,11 +1,8 @@
 package com.revature.bankapp.menu;
 
-import java.util.Scanner;
-
-import com.revature.bankapp.dao.impl.CustomerDaoImpl;
+import com.revature.bankapp.form.EmployeeForm;
 import com.revature.bankapp.form.LoginForm;
-import com.revature.bankapp.main.BankApp;
-import com.revature.bankapp.model.Customer;
+import com.revature.bankapp.form.SignUpForm;
 
 public class MainMenu extends Menu{
 
@@ -20,37 +17,22 @@ public class MainMenu extends Menu{
 
 	@Override
 	void handleAction() {
-		Scanner scanner = BankApp.getScanner();
-		//Scanner scanner = new Scanner(System.in);
 		switch (selection) {
-		case 1:
-			System.out.println("\n************************");
-			System.out.println("New Customer!!, Register");
-			System.out.println("************************");
-			
-			System.out.print("First Name: ");
-			String firstName = scanner.nextLine();
-			
-			System.out.print("Last Name: ");
-			String lastName = scanner.nextLine();
-			
-			System.out.print("Email: ");
-			String email = scanner.nextLine();
-			
-			System.out.print("Password: ");
-			String password = scanner.nextLine();
-			
-			//DataManager.addCustomer(new Customer(firstName, lastName, email, password));
-			Customerdao dao = new CustomerDaoImpl();
-			dao.create(new Customer(firstName, lastName, email, password));
-			System.out.println("Customer added successfully");
-			displayMenuAndCaptureSelection();
+		case 1:			
+			SignUpForm signUpForm = new SignUpForm("SignUp");
+			signUpForm.captureDataAndPerformAction();
 			break;
 		case 2:
-			LoginForm loginForm = new LoginForm("Login Form");
+			LoginForm loginForm = new LoginForm("Login");
 			loginForm.captureDataAndPerformAction();
 			break;
-			
+		case 3:
+			EmployeeForm employeeForm = new EmployeeForm("Employee Form");
+			employeeForm.captureDataAndPerformAction();
+			break;
+		case 4:
+			System.out.println("Exiting BankApp");
+			break;
 		}
 	}
 	
