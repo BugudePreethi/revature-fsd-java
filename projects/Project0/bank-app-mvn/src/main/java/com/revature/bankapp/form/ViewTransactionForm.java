@@ -77,7 +77,7 @@ public class ViewTransactionForm extends Form {
 			System.out.println("Failed getting Customer.");
 		}
 		accountList.forEach(System.out::println);
-		System.out.print("Choose an account from the given list of accounts");
+		System.out.print("Choose an account from the given list of accounts : ");
 		accountNumber = scanner.nextDouble();
 		System.out.print("Enter the amount : ");
 		amount = scanner.nextDouble();

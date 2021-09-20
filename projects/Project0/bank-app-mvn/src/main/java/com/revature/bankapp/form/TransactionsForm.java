@@ -24,7 +24,7 @@ public class TransactionsForm extends Form{
 		System.out.println("\n------------------------");
 		System.out.println("Type Transaction Balance");
 		System.out.println("------------------------");
-		ViewTransactionForm viewTransactionForm = new ViewTransactionForm("Form"); 
+		
 	}
 
 }
