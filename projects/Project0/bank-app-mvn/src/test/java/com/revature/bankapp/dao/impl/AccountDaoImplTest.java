@@ -13,10 +13,16 @@ class AccountDaoImplTest {
 
 	@Test
 	void testCreate_Success() {
-		Account account = new Account(100001, 2000);
+		/*Customer customer = new Customer();
+		customer.setId(1);
+		BankApp.setCurrentCustomer(customer);*/
+		//Account account = new Account(100003, 2000);
 		AccountDao dao = new AccountDaoImpl();
 		try {
-			dao.create(account);
+			//dao.create(account);
+			dao.list();
+			//Account account = new Account();
+			//dao.get(balance);
 		} catch(SQLException e) {
 			e.printStackTrace();
 			fail("Not yet implemented");

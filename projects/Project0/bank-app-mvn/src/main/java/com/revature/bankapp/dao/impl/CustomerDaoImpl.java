@@ -16,10 +16,11 @@ public class CustomerDaoImpl implements CustomerDao{
 		try(Connection connection = Util.getConnection()) {
 			String sql = "insert into customer (firstName, lastName, email, password) values (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, "William");
-			statement.setString(2, "Smith");
-			statement.setString(3, "william@gmail.com");
-			statement.setString(4, "smith");
+			statement.setString(1, customer.getFirstName());
+			statement.setString(2, customer.getLastName());
+			statement.setString(3, customer.getEmail());
+			statement.setString(4, customer.getPassword());
+			//statement.setDouble(4, customer.getMobileNumber());
 			statement.executeUpdate();	
 			
 		}
@@ -27,7 +28,6 @@ public class CustomerDaoImpl implements CustomerDao{
 
 	@Override
 	public Customer getCustomerByEmail(String email) throws SQLException {
-		
 		try(Connection connection = Util.getConnection()) {
 			String sql = "SELECT * FROM bankapp.customer where email = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -40,6 +40,8 @@ public class CustomerDaoImpl implements CustomerDao{
 				customer.setLastName(resultSet.getString("lastName"));
 				customer.setEmail(resultSet.getString("email"));
 				customer.setPassword(resultSet.getString("password"));
+				
+				//customer.setMobileNumber(resultSet.getDouble("mobileNumber"));
 				return customer;
 			}
 		}

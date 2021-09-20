@@ -3,7 +3,7 @@ package com.revature.bankapp.model;
 public class Account {
 	private double accountNumber;
 	private double balance;
-	//private int customerId;
+	private int customerId;
 	private int id;
 	
 	public int getId() {
@@ -24,16 +24,21 @@ public class Account {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	/*public int getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
-	}*/
+	}
 	public Account(double accountNumber, double balance) {
 		super();
 		this.accountNumber = accountNumber;
 		this.balance = balance;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account [accountNumber=" + accountNumber + ", balance=" + balance + ", id=" + id + "]";
 	}
 	public Account() {
 		super();

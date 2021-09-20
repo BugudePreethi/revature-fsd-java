@@ -1,12 +1,10 @@
 package com.revature.bankapp.menu;
 
-import com.revature.bankapp.form.EmployeeForm;
 import com.revature.bankapp.form.LoginForm;
 import com.revature.bankapp.form.SignUpForm;
 
 public class MainMenu extends Menu{
-
-	//Passing Constructor
+	
 	public MainMenu(String name) {
 		super(name);
 		addMenuItem("New Customer!, register.");
@@ -27,10 +25,12 @@ public class MainMenu extends Menu{
 			loginForm.captureDataAndPerformAction();
 			break;
 		case 3:
-			EmployeeForm employeeForm = new EmployeeForm("Employee Form");
-			employeeForm.captureDataAndPerformAction();
+			EmployeeMenu menu = new EmployeeMenu("Employee Menu");
+			menu.displayMenuAndCaptureSelection();
 			break;
 		case 4:
+			System.out.println("Thank You for choosing our Bank");
+			System.out.println("Visit Again");
 			System.out.println("Exiting BankApp");
 			break;
 		}

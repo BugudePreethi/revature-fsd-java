@@ -3,20 +3,20 @@ package com.revature.bankapp.form;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.revature.bankapp.dao.CustomerDao;
-import com.revature.bankapp.dao.impl.CustomerDaoImpl;
+import com.revature.bankapp.dao.EmployeeDao;
+import com.revature.bankapp.dao.impl.EmployeeDaoImpl;
 import com.revature.bankapp.main.BankApp;
-import com.revature.bankapp.menu.CustomerMainMenu;
-import com.revature.bankapp.model.Customer;
+import com.revature.bankapp.menu.EmployeeMenu;
+import com.revature.bankapp.model.Employee;
 
-public class EmployeeForm extends Form {
+public class EmployeeSignUpForm extends Form {
 	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	
-	public EmployeeForm(String name) {
+	public EmployeeSignUpForm(String name) {
 		super(name);
 	}
 	
@@ -40,15 +40,15 @@ public class EmployeeForm extends Form {
 
 	@Override
 	public void action() {
-		/*EmployeeDao dao = new EmployeeDaoImpl();
+		EmployeeDao dao = new EmployeeDaoImpl();
 		try {
-			dao.create(new Employee(firstName, lastName, email, password));
+			dao.create(new Employee(firstName, lastName, email, password, id));
 		} catch (SQLException e) {
 			System.out.println("Error in creating Employee");
 		}
-		
 		System.out.println("Employee added successfully");
-		EmployeeMainMenu menu = new EmployeeMainMenu("EmployeeMainMenu");
-		menu.displayMenuAndCaptureSelection();*/
+		EmployeeMenu menu = new EmployeeMenu("EmployeeMainMenu");
+		menu.displayMenuAndCaptureSelection();
+		success = true;
 	}
 }
