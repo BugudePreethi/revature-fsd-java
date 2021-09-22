@@ -21,6 +21,7 @@ class AccountDaoImplTest {
 		try {
 			//dao.create(account);
 			dao.list();
+			//dao.update(account);
 			//Account account = new Account();
 			//dao.get(balance);
 		} catch(SQLException e) {

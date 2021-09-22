@@ -10,7 +10,7 @@ import com.revature.bankapp.menu.CustomerMainMenu;
 import com.revature.bankapp.model.Account;
 
 public class CreateAccountForm extends Form{
-	private double accountNumber;
+	private String accountNumber;
 	private double balance;
 	private char approved;
 	
@@ -18,11 +18,11 @@ public class CreateAccountForm extends Form{
 		super(name);
 	}
 	
-	public double getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(double accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
@@ -46,10 +46,15 @@ public class CreateAccountForm extends Form{
 	public void captureData() {
 		Scanner scanner = BankApp.getScanner();
 		System.out.print("Account Number : ");
-		accountNumber = scanner.nextDouble();
+		accountNumber = scanner.nextLine();
 		System.out.println("The minimum amount in account should not be less than 2000.");
 		System.out.print("Balance : ");
 		balance = scanner.nextDouble();
+		if(balance < 2000) {
+			System.out.println("Insufficient Balance to create account");
+		} else {
+			System.out.println(balance);
+		}
 		
 	}
 	@Override

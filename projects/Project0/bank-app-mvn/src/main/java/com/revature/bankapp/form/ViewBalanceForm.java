@@ -7,17 +7,17 @@ import java.util.Scanner;
 import com.revature.bankapp.dao.AccountDao;
 import com.revature.bankapp.dao.impl.AccountDaoImpl;
 import com.revature.bankapp.main.BankApp;
-import com.revature.bankapp.menu.CustomerMainMenu;
+import com.revature.bankapp.menu.ViewAccountsMenu;
 import com.revature.bankapp.model.Account;
 
 public class ViewBalanceForm extends Form{
-	private double accountNumber;
+	private String accountNumber;
 	
-	public double getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(double accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
@@ -38,19 +38,19 @@ public class ViewBalanceForm extends Form{
 		accountList.forEach(System.out::println);
 		System.out.print("Choose an account from the given list of accounts");
 		System.out.print("Enter the account number : ");
-		accountNumber = scanner.nextDouble();
+		accountNumber = scanner.nextLine();
 	}
 
 	@Override
 	public void action() {
+		System.out.print("Balance : ");
 		AccountDao dao = new AccountDaoImpl();
-		Account account = null;
 		try {
-			dao.get(balance);
+			System.out.println(dao.showBalance(accountNumber));
 		} catch(SQLException e) {
 			System.out.println("Failed getting balance");
 		}
-		CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
+		ViewAccountsMenu menu = new ViewAccountsMenu("View Accounts Menu");
 		menu.displayMenuAndCaptureSelection();
 		success = true;
 	}

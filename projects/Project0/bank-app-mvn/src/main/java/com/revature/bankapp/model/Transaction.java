@@ -8,6 +8,7 @@ public class Transaction {
 	private double amount;
 	private double balance;
 	private String type;
+	private Double accountNumber;
 	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public int getAccount_id() {
@@ -37,8 +38,15 @@ public class Transaction {
 	public SimpleDateFormat getDate() {
 		return date;
 	}
-	public void setDate(Date date2) {
+	/*public void setDate(Date date2) {
 		this.date = date2;
+	}*/
+	
+	public Double getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(Double accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	public Transaction(double amount, double balance, String type) {
 		super();
