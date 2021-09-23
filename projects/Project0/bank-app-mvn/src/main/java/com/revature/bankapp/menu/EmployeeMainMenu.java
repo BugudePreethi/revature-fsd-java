@@ -2,7 +2,6 @@ package com.revature.bankapp.menu;
 
 import com.revature.bankapp.form.ApproveAccountForm;
 import com.revature.bankapp.form.RejectAccountForm;
-import com.revature.bankapp.form.TransactionsForm;
 import com.revature.bankapp.form.ViewCustomerAccountsForm;
 
 public class EmployeeMainMenu extends Menu{
@@ -12,7 +11,8 @@ public class EmployeeMainMenu extends Menu{
 		addMenuItem("Approve Account");
 		addMenuItem("Reject Account");
 		addMenuItem("View Customer Accounts");
-		addMenuItem("View Transaction");
+		//addMenuItem("View Transaction");
+		addMenuItem("Exit");
 	}
 
 	@Override
@@ -30,11 +30,11 @@ public class EmployeeMainMenu extends Menu{
 			ViewCustomerAccountsForm viewCustomerAccountsForm = new ViewCustomerAccountsForm("View Accounts");
 			viewCustomerAccountsForm.captureDataAndPerformAction();
 			break;
-		case 4:
+		/*case 4:
 			TransactionsForm transactionsForm = new TransactionsForm("Transaction Form");
 			transactionsForm.captureDataAndPerformAction();
-			break;
-		case 5:
+			break;*/
+		case 4:
 			System.out.println("Back to Main Menu");
 			EmployeeMenu employeeMenu = new EmployeeMenu("Menu");
 			employeeMenu.displayMenuAndCaptureSelection();

@@ -11,14 +11,14 @@ import com.revature.bankapp.menu.ViewAccountsMenu;
 import com.revature.bankapp.model.Account;
 
 public class ViewBalanceForm extends Form{
-	private String accountNumber;
+	private int account_id;
 	
-	public String getAccountNumber() {
-		return accountNumber;
+	public int getAccount_id() {
+		return account_id;
 	}
 
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
 	}
 
 	public ViewBalanceForm(String name) {
@@ -36,9 +36,9 @@ public class ViewBalanceForm extends Form{
 			System.out.println("Failed getting Customer.");
 		}
 		accountList.forEach(System.out::println);
-		System.out.print("Choose an account from the given list of accounts");
-		System.out.print("Enter the account number : ");
-		accountNumber = scanner.nextLine();
+		System.out.print("Choose an account_id from the given list of accounts");
+		System.out.print("Enter the account id : ");
+		account_id = scanner.nextInt();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ViewBalanceForm extends Form{
 		System.out.print("Balance : ");
 		AccountDao dao = new AccountDaoImpl();
 		try {
-			System.out.println(dao.showBalance(accountNumber));
+			System.out.println(dao.showBalance(account_id));
 		} catch(SQLException e) {
 			System.out.println("Failed getting balance");
 		}

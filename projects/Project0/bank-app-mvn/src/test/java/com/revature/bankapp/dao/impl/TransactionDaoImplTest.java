@@ -14,7 +14,7 @@ class TransactionDaoImplTest {
 	void test() {
 		TransactionDao dao = new TransactionDaoImpl();
 		try {
-			dao.list();
+			dao.add(null);
 		} catch(SQLException e) {
 			e.printStackTrace();
 			fail("Not yet implemented");

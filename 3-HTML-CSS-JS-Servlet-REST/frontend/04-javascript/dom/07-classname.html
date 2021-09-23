@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Inner HTML</title>
+        <style>
+            .p{
+                color:blue;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="para">This is a paragraph.</p>
+        <script>
+            //Element contain HTML element object
+            var element = document.getElementById("para");
+            element.className = "p";
+        </script>
+    </body>
+</html>

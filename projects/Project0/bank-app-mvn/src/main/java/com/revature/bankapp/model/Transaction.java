@@ -1,15 +1,11 @@
 package com.revature.bankapp.model;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 public class Transaction {
 	private int account_id;
 	private double amount;
 	private double balance;
 	private String type;
 	private String accountNumber;
-	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public int getAccount_id() {
 		return account_id;
@@ -53,7 +49,7 @@ public class Transaction {
 	}
 	@Override
 	public String toString() {
-		return "Transaction [account_id=" + account_id + ", type=" + type +", amount=" + amount + ", balance=" + balance + ", date=" + date + "]";
+		return "Transaction [account_id=" + account_id + ", type=" + type +", amount=" + amount + ", balance=" + balance + "]";
 	}
 	
 }

@@ -3,7 +3,7 @@ package com.revature.bankapp.menu;
 import com.revature.bankapp.form.TransferForm;
 import com.revature.bankapp.form.ViewAccountsForm;
 import com.revature.bankapp.form.ViewBalanceForm;
-import com.revature.bankapp.form.ViewTransactionForm;
+import com.revature.bankapp.form.WithdrawDepositForm;
 
 public class ViewAccountsMenu extends Menu{
 
@@ -11,7 +11,8 @@ public class ViewAccountsMenu extends Menu{
 		super(name);
 		addMenuItem("View Accounts");
 		addMenuItem("View Balance");
-		addMenuItem("View Transactions");
+		addMenuItem("Withdraw/Deposit");
+		//addMenuItem("View Transactions");
 		addMenuItem("Transfer");
 		addMenuItem("Back to Menu");
 	}
@@ -28,9 +29,13 @@ public class ViewAccountsMenu extends Menu{
 			viewBalanceForm.captureDataAndPerformAction();
 			break;
 		case 3:
-			ViewTransactionForm viewTransactionForm = new ViewTransactionForm("Transactions");
-			viewTransactionForm.captureDataAndPerformAction();
+			WithdrawDepositForm form = new WithdrawDepositForm("Withdraw");
+			form.captureDataAndPerformAction();
 			break;
+		/*case 4:
+			Form viewTransactionForm = new ViewTransactionForm("Transactions");
+			viewTransactionForm.captureDataAndPerformAction();
+			break;*/
 		case 4:
 			TransferForm transferForm = new TransferForm("Transfer Form");
 			transferForm.captureDataAndPerformAction();

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example of Inner HTML</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td id = "name"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td id = "gender"></td>
+            </tr>
+            <tr>
+                <td>Salary</td>
+                <td id = "salary"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Salary</th>
+            </tr>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+        <script>
+            var male = {code: "M", name: "Male"};
+            var female = {code: "F", name: "Female"};
+            var employee = {name:"John", gender:male, salary:2000};
+            var employee1 = {name:"Stella", gender:female, salary:1500};
+            document.getElementById("name").innerHTML = employee.name;
+            document.getElementById("gender").innerHTML = employee.gender.name;
+            document.getElementById("salary").innerHTML = employee.salary;
+
+            var employees = [employee, employee1, employee, employee1];
+            let innerHTML = "";
+            /*<tr>
+                <td>col1</td>
+                <td>col2</td>
+                <td>col3</td>
+            </tr>*/
+            for(let employee of employees){
+                /*innerHTML += "<tr>";
+                innerHTML += "<td>" + employee.name + "</td>";
+                innerHTML += "<td>" + employee.gender.name + "</td>";
+                innerHTML += "<td>" + employee.salary + "</td>";
+                innerHTML += "</tr>";*/
+                innerHTML +=`<tr>
+                    <td>${employee.name}</td>
+                    <td>${employee.gender.name}</td>
+                    <td>${employee.salary}</td>
+                </tr>`;
+            }
+            document.getElementById("table-body").innerHTML = innerHTML;
+        </script>
+    </body>
+</html>

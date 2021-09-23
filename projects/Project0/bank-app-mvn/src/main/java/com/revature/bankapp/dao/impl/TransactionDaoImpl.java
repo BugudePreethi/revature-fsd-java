@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.revature.bankapp.dao.TransactionDao;
 import com.revature.bankapp.dao.Util;
-import com.revature.bankapp.form.ViewTransactionForm;
+import com.revature.bankapp.model.Account;
 import com.revature.bankapp.model.Transaction;
 
 public class TransactionDaoImpl implements TransactionDao {
@@ -18,38 +18,30 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public void create(Transaction transaction) throws SQLException {
 		try(Connection connection = Util.getConnection()){
-			String sql = "insert into transaction (account_id, amount, type, balance) values(?, ?, ?, ?);";
+			connection.setAutoCommit(false);
+			String sql = "insert into transaction (account_id, amount, type, balance) values (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
+			System.out.println(transaction);
 			statement.setInt(1, transaction.getAccount_id());
 			statement.setDouble(2, transaction.getAmount());
 			statement.setString(3, transaction.getType());
 			statement.setDouble(4, transaction.getBalance());
-			statement.executeUpdate(sql);
+			statement.executeUpdate();
+			connection.commit();
 		}
 	}
-	@Override
-	public void update(Transaction transaction) throws SQLException {
-		try (Connection connection = Util.getConnection()) {
-			String sql = "update account set balance = ?, amount = ? where accountNumber = ?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setDouble(1, transaction.getBalance());
-			statement.setDouble(2, transaction.getAmount());
-			statement.setString(3, transaction.getAccountNumber());
-			statement.executeUpdate(sql);
-		}
-
-	}
-	// View Transaction Table of specific Amount
 
 	@Override
 	public List<Transaction> list() throws SQLException {
 		List<Transaction> transactionList = new ArrayList<>(); 
+		Transaction transaction = new Transaction();
 		try(Connection connection = Util.getConnection()){
-			String sql = "SELECT * FROM transaction";
+			String sql = "SELECT * FROM transaction where account_id = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, transaction.getAccount_id());
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				Transaction transaction = new Transaction();
+				//Transaction transaction = new Transaction();
 				transaction.setAmount(resultSet.getDouble("amount"));
 				transaction.setType(resultSet.getString("type"));
 				transaction.setBalance(resultSet.getDouble("balance"));
@@ -57,6 +49,18 @@ public class TransactionDaoImpl implements TransactionDao {
 			}
 		}
 		return transactionList;
+	}
+
+	public void add(Transaction transaction) throws SQLException {
+		try(Connection connection = Util.getConnection()){
+			String sql = "insert into transaction (account_id, type, amount, balance) values(?, ?, ?, ?)";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, 1);
+			statement.setString(2, "D");
+			statement.setDouble(3, 200.0);
+			statement.setDouble(4, 2000.0);
+			statement.executeUpdate();			
+		}
 	}
 	
 	/*public void insertTransfer(Transactions transaction) throws SQLException {

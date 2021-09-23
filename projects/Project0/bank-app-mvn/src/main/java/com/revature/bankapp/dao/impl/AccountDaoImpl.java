@@ -52,12 +52,12 @@ public class AccountDaoImpl implements AccountDao{
 
 	//View balance of specific account
 	@Override
-	public double showBalance(String accountNumber) throws SQLException {
+	public double showBalance(int account_id) throws SQLException {
 		double balanceInDB = 0;
 		try(Connection connection = Util.getConnection()){
-			String sql = "SELECT balance FROM bankapp.account where accountNumber = ?";
+			String sql = "SELECT balance FROM bankapp.account where id = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, accountNumber);
+			statement.setInt(1, account_id);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				balanceInDB = (double) resultSet.getDouble("balance");			
@@ -65,26 +65,40 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		return balanceInDB;
 	}
-
-	//Transfer Amount from one account to another
+	//Update account after deposit and transaction
 	@Override
 	public void update(Account account) throws SQLException {
 		try (Connection connection = Util.getConnection()) {
 			String sql = "update account set balance = ? where accountNumber = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			TransferForm transferForm = new TransferForm("Form");
-			statement.setDouble(1, transferForm.getBalance());
-			statement.setString(2, transferForm.getAccountNumber());
-			statement.executeUpdate(sql);
-			String sql1 = "update account set balance = ? where accountNumber = ?";
-			PreparedStatement statement1 = connection.prepareStatement(sql1);
-			TransferForm transferForm1 = new TransferForm("Form");
-			statement1.setDouble(1, transferForm1.getBalance1());
-			statement1.setString(2, transferForm1.getAccountNumber1());			
-			statement.executeUpdate(sql1);
+			statement.setDouble(1, account.getBalance());
+			//statement.setDouble(2, transaction.getAmount());
+			statement.setString(2, account.getAccountNumber());
+			statement.executeUpdate();
 		}
+
 	}
-	
+
+
+//	//Transfer Amount from one account to another
+//	@Override
+//	public void update(Account account) throws SQLException {
+//		try (Connection connection = Util.getConnection()) {
+//			String sql = "update account set balance = ? where accountNumber = ?";
+//			PreparedStatement statement = connection.prepareStatement(sql);
+//			TransferForm transferForm = new TransferForm("Form");
+//			statement.setDouble(1, transferForm.getBalance());
+//			statement.setString(2, transferForm.getAccountNumber());
+//			statement.executeUpdate(sql);
+//			String sql1 = "update account set balance = ? where accountNumber = ?";
+//			PreparedStatement statement1 = connection.prepareStatement(sql1);
+//			TransferForm transferForm1 = new TransferForm("Form");
+//			statement1.setDouble(1, transferForm1.getBalance1());
+//			statement1.setString(2, transferForm1.getAccountNumber1());			
+//			statement.executeUpdate(sql1);
+//		}
+//	}
+//	
 	//Approve account 
 	@Override
 	public void approveAccount(String accountNumber) throws SQLException {

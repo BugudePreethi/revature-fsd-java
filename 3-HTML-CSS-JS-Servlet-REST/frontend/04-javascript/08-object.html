@@ -9,6 +9,27 @@
             console.log(male.code);
             console.log(male.name);
             console.log(male);
+            var female = {code: "F", name: "Female"};
+            console.log(female.code);
+            console.log(female.name);
+            console.log(female);
+            var employee = {name:"John", gender:male, salary:2000};
+            console.log(employee.name);
+            console.log(employee.gender.name);
+            console.log(employee.salary);
+            console.log(employee);
+            var employee1 = {name:"Stella", gender:female, salary:1500};
+            console.log(employee1.name);
+            console.log(employee1.gender.name);
+            console.log(employee1.salary);
+            console.log(employee1);
+            var employees = [employee, employee1];
+            console.log(employees[0].gender.code);
+            console.log(employees[1].gender.code);
+            console.log(employees);
+            for(var employee of employees){
+                console.log(employee);
+            }
         </script>
     </body>
 </html>
