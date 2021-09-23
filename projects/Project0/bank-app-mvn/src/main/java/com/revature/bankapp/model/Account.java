@@ -5,6 +5,7 @@ public class Account {
 	private double balance;
 	private int customerId;
 	private int id;
+	private String approved;
 	
 	public int getId() {
 		return id;
@@ -29,6 +30,13 @@ public class Account {
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
+	}
+	
+	public String getApproved() {
+		return approved;
+	}
+	public void setApproved(String approved) {
+		this.approved = approved;
 	}
 	public Account(String accountNumber, double balance) {
 		super();

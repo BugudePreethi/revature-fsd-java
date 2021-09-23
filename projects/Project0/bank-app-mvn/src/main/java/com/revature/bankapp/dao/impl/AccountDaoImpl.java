@@ -66,27 +66,6 @@ public class AccountDaoImpl implements AccountDao{
 		return balanceInDB;
 	}
 
-	
-	@Override
-	public List<Account> Approvedlist() throws SQLException {
-		List<Account> accountList1 = new ArrayList<>(); 
-		try(Connection connection = Util.getConnection()){
-			String sql = "SELECT * FROM account where approved = N";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			/*Transaction viewTransactionForm = new ViewTransactionForm("Form");
-			statement.setString(1, viewTransactionForm.getType());
-			ResultSet resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				Account account = new Account();
-				account.setId(resultSet.getInt("id"));
-				account.setAccountNumber(resultSet.getString("accountNumber"));
-				account.setBalance(resultSet.getDouble("balance"));
-				accountList1.add(account);
-			}*/
-		}
-		return accountList1;
-	}
-
 	//Transfer Amount from one account to another
 	@Override
 	public void update(Account account) throws SQLException {
@@ -105,18 +84,29 @@ public class AccountDaoImpl implements AccountDao{
 			statement.executeUpdate(sql1);
 		}
 	}
-
+	
+	//Approve account 
 	@Override
-	public String updateStatus(String accountNumber) throws SQLException {
+	public void approveAccount(String accountNumber) throws SQLException {
 		try(Connection connection = Util.getConnection()){
-			String sql ="update account set approved = ? where accountNumber = ?";
+			String sql ="update account set approved = 'Y' where accountNumber = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			ApproveAccountForm approve = new ApproveAccountForm("Form");
-			statement.setString(1, "Y");
-			statement.setString(2, approve.getAccountNumber());
+			statement.setString(1, accountNumber);
+			statement.executeUpdate();
 		}
-		return updateStatus(null);
 	}
+	
+	//Reject Account
+	@Override
+	public void rejectAccount(String accountNumber) throws SQLException {
+		try(Connection connection = Util.getConnection()){
+			String sql ="update account set approved = 'R' where accountNumber = ?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, accountNumber);
+			statement.executeUpdate();
+		}
+	}
+	
 	
 	
 }

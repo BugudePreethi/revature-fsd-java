@@ -8,7 +8,6 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String password;
-	//private double mobileNumber;
 	private List<Account> accountList;
 	
 	public Customer() {		
@@ -20,7 +19,6 @@ public class Customer {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		//this.mobileNumber = mobileNumber;
 	}
 	
 	public String getFirstName() {
@@ -53,14 +51,6 @@ public class Customer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	/*public double getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(double mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}*/
 
 	public List<Account> getAccountList() {
 		return accountList;

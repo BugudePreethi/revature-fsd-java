@@ -6,6 +6,7 @@ import java.util.List;
 import com.revature.bankapp.model.Transaction;
 
 public interface TransactionDao {
-	void update(Transaction transaction) throws SQLException;
+	void create(Transaction transaction) throws SQLException;
+ 	void update(Transaction transaction) throws SQLException;
 	List<Transaction> list() throws SQLException;
 }

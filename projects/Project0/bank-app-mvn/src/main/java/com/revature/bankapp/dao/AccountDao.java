@@ -6,11 +6,10 @@ import java.util.List;
 import com.revature.bankapp.model.Account;
 
 public interface AccountDao {
-	void create(Account account) throws SQLException;
-	List<Account> list() throws SQLException;
-	double showBalance (String accountNumber) throws SQLException;
+	void create(Account account) throws SQLException;//Create a new account 
+	List<Account> list() throws SQLException;//View Accounts of current customer
+	double showBalance (String accountNumber) throws SQLException;//View balance of a specific account
 	void update(Account account) throws SQLException;
-	List<Account> Approvedlist() throws SQLException;
-	String updateStatus (String accountNumber) throws SQLException;
-
+	void approveAccount(String accountNumber) throws SQLException;//Approve Account
+	void rejectAccount(String accountNumber) throws SQLException;//Reject Account
 }

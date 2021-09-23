@@ -15,6 +15,7 @@ import com.revature.bankapp.model.Transaction;
 
 public class ViewTransactionForm extends Form {
 	public String accountNumber;
+	private double balance;
 	
 	public String getAccountNumber() {
 		return accountNumber;
@@ -22,6 +23,15 @@ public class ViewTransactionForm extends Form {
 
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
 	public ViewTransactionForm(String name) {
@@ -42,16 +52,17 @@ public class ViewTransactionForm extends Form {
 			System.out.println("Failed getting Customer.");
 		}
 		accountList.forEach(System.out::println);
-		System.out.print("Choose an account from the given list of accounts");
+		System.out.println("Choose an account from the given list of accounts.");
 		System.out.print("Enter the account number : ");
-		accountNumber = scanner.nextDouble();
+		String accountNumber = scanner.next();
+		transaction.setAccountNumber(accountNumber);
 		System.out.println("Enter 'W' for withdrawl and 'D' for Deposit");
-		String type = transaction.getType();
-		type = scanner.next();
-		TransactionDao dao = new TransactionDaoImpl();
+		String type = scanner.next();
+		transaction.setType(type);
+		TransactionDao dao1 = new TransactionDaoImpl();
 		List<Transaction> transactionList = null;
 		try {
-			transactionList = dao.list();
+			transactionList = dao1.list();
 		} catch(SQLException e) {
 			System.out.println("Failed getting transactions");
 		}
@@ -62,27 +73,36 @@ public class ViewTransactionForm extends Form {
 	@Override
 	public void action() {
 		Account account = new Account();
-		Double balance = account.getBalance();
-		if(type == "W") {
-			//account.setId(BankApp.getCurrentCustomer().getId());
-			System.out.println(balance);
-			if (balance < 2000) {
-				System.out.println("Withdrawing the amount is not possible");
-			} else {
+		balance = getBalance();
+		System.out.print("Balance : ");
+		AccountDao dao = new AccountDaoImpl();
+		try {
+			System.out.println(dao.showBalance(accountNumber));
+		} catch(SQLException e) {
+			System.out.println("Failed getting balance");
+		}
+		if(transaction.getType() == "W") {
+			if(balance >= transaction.getAmount()) {
 				balance = balance - transaction.getAmount();
 				System.out.println("The total balance is " + balance);
+			} else {
+				System.out.println("Insufficient Amount");
 			}
 			account.setBalance(balance);
-			CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
-			menu.displayMenuAndCaptureSelection();
-			success = true;
 		} else if (transaction.getType() == "D") {
 			balance = balance + transaction.getAmount();
 			account.setBalance(balance);
-			CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
-			menu.displayMenuAndCaptureSelection();
-			success = true;
 		}
+		TransactionDao tDao = new TransactionDaoImpl();
+		try {
+			tDao.create(transaction);
+			tDao.update(transaction);
+		}catch(SQLException e) {
+			e.printStackTrace();
+			System.out.println("Failed getting transactions");
+		}
+		CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
+		menu.displayMenuAndCaptureSelection();
 		success = true;
 	}
 
