@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Getting Elements</title>
+    </head>
+    <body>
+        <div class="para">Div 1</div>
+        <div class="para">Div 2</div>
+        <div class="para">Div 3</div>
+        <div class="para">Div 4</div>
+        <script>
+            var paras = document.getElementsByClassName("para");
+            for (let i =  0; i < paras.length; i++){
+                console.log(paras[i].innerText);
+            }
+
+            var paras1 = document.querySelectorAll(".para");
+            for(let i = 0; i < paras1.length; i++){
+                console.log(paras1[i].innerText);
+            }
+            document.getElementsByName("name");
+            document.getElementsByTagName("table");
+            document.querySelector(".para");
+        </script>
+    </body>
+</html>

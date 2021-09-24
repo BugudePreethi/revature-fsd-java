@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://api.github.com/users/BugudePreethi/repos");
+            xhr.send();
+            xhr.addEventListener("readystatechange", function() {
+                if (xhr.readyState == 4) {
+                    var repos = JSON.parse(xhr.responseText);
+                    for (let repo of repos) {
+                        console.log(repo.name);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

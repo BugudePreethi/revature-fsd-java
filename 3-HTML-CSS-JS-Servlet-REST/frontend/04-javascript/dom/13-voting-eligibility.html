@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Voting Eligibility</title>
+        <style>
+            #message{
+                color: blue;
+                font-weight: bold;
+                font-size: medium;
+            }
+        </style>
+    </head>
+    <body>
+        <label for="age">Age</label>
+        <input type="text" id="age" value="19">
+        <div id="message"></div>
+        <script>
+        var age = document.getElementById("age");
+        var message = document.getElementById("message");
+        age.addEventListener("keyup",function(){
+            if(age.value < 18){
+                message.innerText = "Not eligible to Vote.";
+            } else{
+                message.innerText = "Eligible to Vote."
+            }
+        });
+        </script>
+    </body>
+</html>

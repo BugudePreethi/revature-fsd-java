@@ -18,7 +18,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public void create(Transaction transaction) throws SQLException {
 		try(Connection connection = Util.getConnection()){
-			connection.setAutoCommit(false);
+			//connection.setAutoCommit(false);
 			String sql = "insert into transaction (account_id, amount, type, balance) values (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			System.out.println(transaction);
@@ -27,21 +27,22 @@ public class TransactionDaoImpl implements TransactionDao {
 			statement.setString(3, transaction.getType());
 			statement.setDouble(4, transaction.getBalance());
 			statement.executeUpdate();
-			connection.commit();
+			//connection.commit();
 		}
 	}
 
+	//View transactions
 	@Override
 	public List<Transaction> list() throws SQLException {
 		List<Transaction> transactionList = new ArrayList<>(); 
 		Transaction transaction = new Transaction();
 		try(Connection connection = Util.getConnection()){
-			String sql = "SELECT * FROM transaction where account_id = ?";
+			String sql = "SELECT * FROM transaction";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, transaction.getAccount_id());
+			//statement.setInt(1, transaction.getAccount_id());
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
-				//Transaction transaction = new Transaction();
+				transaction.setAccount_id(resultSet.getInt("account_id"));
 				transaction.setAmount(resultSet.getDouble("amount"));
 				transaction.setType(resultSet.getString("type"));
 				transaction.setBalance(resultSet.getDouble("balance"));

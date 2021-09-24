@@ -17,7 +17,16 @@ public class WithdrawDepositForm extends Form {
 	private double amount;
 	private double balance;
 	private String type;
+	private char type2;
 	
+	public char getType2() {
+		return type2;
+	}
+
+	public void setType2(char type2) {
+		this.type2 = type2;
+	}
+
 	public double getAmount() {
 		return amount;
 	}
@@ -63,12 +72,12 @@ public class WithdrawDepositForm extends Form {
 		// Choose account
 		System.out.println("Choose an account_id from the given list of accounts.");
 		System.out.print("Enter the account_id : ");
+		type2 = scanner.nextLine().charAt(0);
 		int id = scanner.nextInt();
 		transaction.setAccount_id(id);
 		// Choose whether withdraw or deposit
 		System.out.println("Enter 'W' for withdrawl and 'D' for Deposit");
-		String type = scanner.next();
-		transaction.setType(type);
+		//transaction.setType(type);
 		// Enter the amount
 		System.out.print("Enter the amount : ");
 		double amount = scanner.nextDouble();
@@ -82,20 +91,36 @@ public class WithdrawDepositForm extends Form {
 		AccountDao bDao = new AccountDaoImpl();
 		try {
 			balance = bDao.showBalance(transaction.getAccount_id());
-			System.out.println(balance);
+			System.out.println("Line 85");
+			System.out.print(balance);
+			transaction.setBalance(balance);
 		} catch (SQLException e) {
 			System.out.println("Failed getting balance");
 		}
-		type = transaction.getType();
+		
+		//type = transaction.getType();
 		amount = transaction.getAmount();
-		if (type == "D") {
+		balance = transaction.getBalance();
+		System.out.println("Line 94");
+		System.out.print(balance);
+		if (type2 == 'D') {
+			System.out.println("Line 97");
+			System.out.print("The total balance  in D is ");
+			System.out.print(balance);
 			balance = balance + amount;
 			System.out.print("The total balance is ");
 			System.out.print(balance);
 			transaction.setBalance(balance);
-		}else if (type == "W") {
+		}else if (type2 == 'W') {
 			if (balance >= amount) {
 				balance = balance - amount;
+//				TransactionDao tDao = new TransactionDaoImpl();
+//				try {
+//					tDao.create(transaction);
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//					System.out.println("Failed inserting transactions");
+//				}
 				System.out.print("The total balance is ");
 				System.out.print(balance);
 				transaction.setBalance(balance);
@@ -103,8 +128,6 @@ public class WithdrawDepositForm extends Form {
 				System.out.println("Insufficient Amount");
 			}
 		}
-		balance = transaction.getBalance();
-		System.out.println(balance);
 		TransactionDao tDao = new TransactionDaoImpl();
 		try {
 			tDao.create(transaction);
@@ -112,6 +135,14 @@ public class WithdrawDepositForm extends Form {
 			e.printStackTrace();
 			System.out.println("Failed inserting transactions");
 		}
+		
+//		TransactionDao tDao = new TransactionDaoImpl();
+//		try {
+//			tDao.create(transaction);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			System.out.println("Failed inserting transactions");
+//		}
 		/*
 		 * AccountDao aDao = new AccountDaoImpl(); 
 		 * try { aDao.update(account); 
