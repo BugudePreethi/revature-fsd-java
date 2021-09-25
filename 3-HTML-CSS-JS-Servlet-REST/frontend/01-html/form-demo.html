@@ -5,34 +5,34 @@
     </head>
     <body>
         <h1>Form Demo</h1>
-        <form>
+        <form method="post" action="https://www.w3schools.com/action_page.php">
             <label for="name">Name:</label>
-            <input type="text" id="name" placeholder="Enter your name"><br><br>
+            <input type="text" id="name" placeholder="Enter your name" name="name"><br><br>
             <label>Password:</label>
-            <input type="password" placeholder="Minimum 8 characters" required><br><br>
+            <input type="password" placeholder="Minimum 8 characters" required name="password"><br><br>
             <label for="email">Email:</label>
-            <input type ="text" id="email" placeholder="Email" pattern="[a-z0-9,_%+-]+@[a-z0-9.9.-]+\.[a-z]{2,}$" title="Enter a valid email."><br><br>
-            <select>
+            <input type ="text" id="email" placeholder="Email" pattern="[a-z0-9,_%+-]+@[a-z0-9.9.-]+\.[a-z]{2,}$" title="Enter a valid email." name="email"><br><br>
+            <select name="color">
                 <option>Red</option>
                 <option>Green</option>
                 <option selected>Blue</option>
             </select><br><br>
             <label>Gender</label><br>
-            <input type="radio" name="gender" id="male">
+            <input type="radio" name="gender" value="m" id="male">
             <label for="male">Male</label>
-            <input type="radio" name="gender" id="female" checked>
+            <input type="radio" name="gender" value="f" id="female" checked>
             <label for="female">Female</label><br>
-            <select multiple>
+            <select multiple name="languages-m">
                 <option>English</option>
                 <option>Hindi</option>
                 <option>Telugu</option>
                 <option>Kannada</option>
             </select><br>
-            <input type="checkbox" id="english"><label for="english">English</label><br>
-            <input type="checkbox" id="hindi"><label for="hindi">Hindi</label><br>
-            <input type="checkbox" id="telugu"><label for="telugu">Telugu</label><br>
-            <input type="checkbox" id="kannada"><label for="kannada">Kannada</label><br>
-            <textarea>Line 1
+            <input type="checkbox" value="eng" id="english" name="languages"><label for="english">English</label><br>
+            <input type="checkbox" value="hin" id="hindi" name="languages"><label for="hindi">Hindi</label><br>
+            <input type="checkbox" value="tel" id="telugu" name="languages"><label for="telugu">Telugu</label><br>
+            <input type="checkbox" value="kan" id="kannada" name="languages"><label for="kannada">Kannada</label><br>
+            <textarea name="textarea">Line 1
 Line 2
 Line 3
             </textarea><br>

@@ -73,7 +73,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Customer> customerList() throws SQLException {
 		List<Customer> customerList = new ArrayList<>();
-		//List<Account> accountList = new ArrayList<>();
+		List<Account> accountList = new ArrayList<>();
 		try(Connection connection = Util.getConnection()){
 			String sql ="select customer_id,firstName,lastName,email,accountNumber,balance,approve from customer c inner join account a where a.customer_id = c.id";
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -84,12 +84,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				customer.setLastName(resultSet.getString("lastName"));
 				customer.setEmail(resultSet.getString("email"));
 				customerList.add(customer);
-				/*Account account = new Account();
+				Account account = new Account();
 				account.setAccountNumber(resultSet.getString("accountNumber"));
 				account.setBalance(resultSet.getDouble("balance"));
 				account.setCustomerId(resultSet.getInt("customer_id"));
 				account.setApproved(resultSet.getString("approved"));
-				accountList.add(account);*/
+				accountList.add(account);
 			}
 		}
 		return null;

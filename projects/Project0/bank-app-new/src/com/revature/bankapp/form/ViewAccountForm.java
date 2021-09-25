@@ -15,9 +15,9 @@ public class ViewAccountForm extends Form{
 
 	@Override
 	public void captureData() {
-		DataManager.getAccountNumber(accountNumber);
-		.getFirstName();
-		
+//		DataManager.getAccountNumber(accountNumber);
+//		.getFirstName();
+//		
 	}
 
 	@Override

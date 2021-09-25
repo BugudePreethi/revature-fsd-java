@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            async function getRepos() {
+                let response = await fetch("https://api.github.com/users/BugudePreethi/repos");
+                let repos = await response.json();
+                for (let repo of repos) {
+                    console.log(repo.name);
+                }
+            };
+            getRepos();
+        </script>
+    </body>
+</html>

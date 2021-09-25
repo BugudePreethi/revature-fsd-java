@@ -15,8 +15,8 @@ public class ViewAccountMenu {
 	public void action() {
 		System.out.println("Account Number : " + accountNumber);
 		System.out.println("Balance :" + balance);
-		TransactionMenu transactionMenu = new TransactionMenu();
-		transactionMenu.printTransactionStatement();
+//		TransactionMenu transactionMenu = new TransactionMenu();
+//		transactionMenu.printTransactionStatement();
 	}
 
 }

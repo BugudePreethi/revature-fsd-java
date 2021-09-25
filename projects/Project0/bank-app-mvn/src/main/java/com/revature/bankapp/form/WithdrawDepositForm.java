@@ -16,15 +16,15 @@ import com.revature.bankapp.model.Transaction;
 public class WithdrawDepositForm extends Form {
 	private double amount;
 	private double balance;
-	private String type;
-	private char type2;
-	
-	public char getType2() {
-		return type2;
+	private char type;
+	private int account_id;
+
+	public int getAccount_id() {
+		return account_id;
 	}
 
-	public void setType2(char type2) {
-		this.type2 = type2;
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
 	}
 
 	public double getAmount() {
@@ -43,11 +43,11 @@ public class WithdrawDepositForm extends Form {
 		this.balance = balance;
 	}
 	
-	public String getType() {
+	public char getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(char type) {
 		this.type = type;
 	}
 
@@ -69,15 +69,16 @@ public class WithdrawDepositForm extends Form {
 		}
 		accountList.forEach(System.out::println);
 		Scanner scanner = BankApp.getScanner();
-		// Choose account
-		System.out.println("Choose an account_id from the given list of accounts.");
-		System.out.print("Enter the account_id : ");
-		type2 = scanner.nextLine().charAt(0);
-		int id = scanner.nextInt();
-		transaction.setAccount_id(id);
 		// Choose whether withdraw or deposit
 		System.out.println("Enter 'W' for withdrawl and 'D' for Deposit");
-		//transaction.setType(type);
+		type = scanner.nextLine().charAt(0);
+		// Choose account
+	    System.out.println("Choose an account_id from the given list of accounts.");
+		System.out.print("Enter the account_id : ");
+		int id = scanner.nextInt();
+		System.out.print(id);
+		transaction.setAccount_id(id);
+		transaction.setType(type);
 		// Enter the amount
 		System.out.print("Enter the amount : ");
 		double amount = scanner.nextDouble();
@@ -91,65 +92,45 @@ public class WithdrawDepositForm extends Form {
 		AccountDao bDao = new AccountDaoImpl();
 		try {
 			balance = bDao.showBalance(transaction.getAccount_id());
-			System.out.println("Line 85");
-			System.out.print(balance);
 			transaction.setBalance(balance);
 		} catch (SQLException e) {
 			System.out.println("Failed getting balance");
 		}
 		
-		//type = transaction.getType();
 		amount = transaction.getAmount();
 		balance = transaction.getBalance();
-		System.out.println("Line 94");
-		System.out.print(balance);
-		if (type2 == 'D') {
-			System.out.println("Line 97");
-			System.out.print("The total balance  in D is ");
-			System.out.print(balance);
+		if (type == 'D') {
 			balance = balance + amount;
 			System.out.print("The total balance is ");
 			System.out.print(balance);
-			transaction.setBalance(balance);
-		}else if (type2 == 'W') {
+		}else if (type == 'W') {
 			if (balance >= amount) {
 				balance = balance - amount;
-//				TransactionDao tDao = new TransactionDaoImpl();
-//				try {
-//					tDao.create(transaction);
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//					System.out.println("Failed inserting transactions");
-//				}
 				System.out.print("The total balance is ");
 				System.out.print(balance);
-				transaction.setBalance(balance);
 			} else {
 				System.out.println("Insufficient Amount");
 			}
 		}
+		System.out.println(balance);
+		System.out.print(transaction.getAccount_id());
 		TransactionDao tDao = new TransactionDaoImpl();
-		try {
-			tDao.create(transaction);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Failed inserting transactions");
-		}
-		
-//		TransactionDao tDao = new TransactionDaoImpl();
-//		try {
+//		/*try {
 //			tDao.create(transaction);
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //			System.out.println("Failed inserting transactions");
-//		}
-		/*
-		 * AccountDao aDao = new AccountDaoImpl(); 
-		 * try { aDao.update(account); 
-		 * } catch
-		 * (SQLException e) { e.printStackTrace();
-		 * System.out.println("Failed updating accounts"); }
-		 */
+//		}*/
+//		
+		Account account = new Account(); 
+		try { 
+			tDao.update(account);
+			System.out.println("Account updated successfully");
+		 } catch(SQLException e) { 
+			 e.printStackTrace();
+		     System.out.println("Failed updating accounts");
+		 }
+		
 
 		CustomerMainMenu menu = new CustomerMainMenu("CustomerMainMenu");
 		menu.displayMenuAndCaptureSelection();

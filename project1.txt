@@ -1,0 +1,11 @@
+1. As a user, I can login.
+2. As a customer, I can register with the bank.
+3. As a customer, I can apply for a new bank account with a starting balance.
+4. As a customer, I can view the list of accounts I own.
+5. As a customer, I can view the balance of specific account.
+6. As a customer, I can make a withdrawl or deposit to a specific account.
+7. As the system, I can reject invalid transactions.(negative balance is not possible).
+8. As a customer, I can view the transactions in specific account.
+9. As a employee, I can view a customer's bank account.
+10. As a employee, I can view the transactions done by the customers account.
+11. As a user, I can logout.

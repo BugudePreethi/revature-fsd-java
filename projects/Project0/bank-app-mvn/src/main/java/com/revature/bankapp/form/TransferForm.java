@@ -10,8 +10,8 @@ import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.model.Account;
 
 public class TransferForm extends Form{
-	private String accountNumber;
-	private String accountNumber1;
+	private int account_id;
+	private int account_id1;
 	private double amount;
 	private double balance;
 	private double balance1;
@@ -20,23 +20,20 @@ public class TransferForm extends Form{
 		super(name);
 	}
 
-	public String getAccountNumber() {
-		return accountNumber;
+	public int getAccount_id() {
+		return account_id;
 	}
 
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
 	}
 
-
-	public String getAccountNumber1() {
-		return accountNumber1;
+	public int getAccount_id1() {
+		return account_id1;
 	}
 
-
-	public void setAccountNumber1(String accountNumber1) {
-		this.accountNumber1 = accountNumber1;
+	public void setAccount_id1(int account_id1) {
+		this.account_id1 = account_id1;
 	}
 
 	public double getBalance() {
@@ -66,31 +63,39 @@ public class TransferForm extends Form{
 			System.out.println("Failed getting Customer.");
 		}
 		accountList.forEach(System.out::println);
-		System.out.print("Choose an accounts from the given list of accounts");
-		System.out.println("Enter the account Number : ");
-		accountNumber = scanner.nextLine();//Amount transfered from this account
-		System.out.println("Enter the account in which amount needs to be transfered : ");
-		accountNumber1 = scanner.nextLine();//Amount transfered to this account
-		System.out.print("Enter the amount : ");
+		System.out.print("Choose an account_id from the given list of accounts");
+		System.out.println("Enter the account Id of the sender : ");
+		account_id = scanner.nextInt();//Amount transfered from this account
+		System.out.println("Enter the account__id in which amount needs to be transfered : ");
+		account_id1 = scanner.nextInt();//Amount transfered to this account
+		System.out.print("Enter the amount to be sent : ");
 		amount = scanner.nextDouble();
-		Account account = new Account();
-		balance = account.getBalance();
-		Account account1 = new Account();
-		balance1 = account1.getBalance();
+//		Account account = new Account();
+//		balance = account.getBalance();
+//		Account account1 = new Account();
+//		balance1 = account1.getBalance();
 	}
 
 	@Override
 	public void action() {
+		System.out.print("Balance of sender account_id: ");
+		AccountDao bDao = new AccountDaoImpl();
+		try {
+			balance = bDao.showBalance(account_id);
+			balance1 = bDao.showBalance(account_id1);
+		} catch (SQLException e) {
+			System.out.println("Failed getting balance");
+		}
 		balance = balance - amount;
 		balance1 = balance1 + amount;
-		AccountDao dao = new AccountDaoImpl();
-		try {
-			Account account = new Account();
-			dao.update(account);
-			System.out.println("Account is updated Successfully");
-		} catch(SQLException e) {
-			System.out.println("Error in transfering the account");
-		}
+//		AccountDao dao = new AccountDaoImpl();
+//		try {
+//			Account account = new Account();
+//			dao.update(account);
+//			System.out.println("Account is updated Successfully");
+//		} catch(SQLException e) {
+//			System.out.println("Error in transfering the account");
+//		}
 		
 	}
 

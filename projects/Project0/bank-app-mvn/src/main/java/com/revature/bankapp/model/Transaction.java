@@ -4,7 +4,7 @@ public class Transaction {
 	private int account_id;
 	private double amount;
 	private double balance;
-	private String type;
+	private char type;
 	private String accountNumber;
 	
 	public int getAccount_id() {
@@ -25,20 +25,20 @@ public class Transaction {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public String getType() {
+	
+	public char getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(char type) {
 		this.type = type;
 	}
-	
 	public String getAccountNumber() {
 		return accountNumber;
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public Transaction(double amount, double balance, String type) {
+	public Transaction(double amount, double balance, char type) {
 		super();
 		this.amount = amount;
 		this.balance = balance;

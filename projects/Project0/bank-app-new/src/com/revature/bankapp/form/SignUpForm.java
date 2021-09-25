@@ -1,12 +1,8 @@
 package com.revature.bankapp.form;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.revature.bankapp.dao.CustomerDao;
-import com.revature.bankapp.dao.impl.CustomerDaoImpl;
 import com.revature.bankapp.main.BankApp;
-import com.revature.bankapp.model.Customer;
 
 public class SignUpForm extends Form{
 	private int id;
@@ -38,14 +34,14 @@ public class SignUpForm extends Form{
 
 	@Override
 	public void action() {
-		CustomerDao dao = new CustomerDaoImpl();
-		try {
-			dao.create(new Customer(firstName, lastName, email, password));
-		} catch (SQLException e) {
-			System.out.println("Error in creating Customer");
-		}
-		System.out.println("Customer added successfully");
-		menu.displayMenuAndCaptureSelection();
+//		CustomerDao dao = new CustomerDaoImpl();
+//		try {
+//			dao.create(new Customer(firstName, lastName, email, password));
+//		} catch (SQLException e) {
+//			System.out.println("Error in creating Customer");
+//		}
+//		System.out.println("Customer added successfully");
+//		menu.displayMenuAndCaptureSelection();
 		/*DataManager.addCustomer(new Customer(firstName, lastName, email, password));
 		System.out.println("Customer added successfully");
 		CustomerMainMenu menu = new CustomerMainMenu("New Customer Menu");

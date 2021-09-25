@@ -9,8 +9,6 @@ import java.util.List;
 
 import com.revature.bankapp.dao.AccountDao;
 import com.revature.bankapp.dao.Util;
-import com.revature.bankapp.form.ApproveAccountForm;
-import com.revature.bankapp.form.TransferForm;
 import com.revature.bankapp.main.BankApp;
 import com.revature.bankapp.model.Account;
 
@@ -65,19 +63,7 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		return balanceInDB;
 	}
-	//Update account after deposit and transaction
-	@Override
-	public void update(Account account) throws SQLException {
-		try (Connection connection = Util.getConnection()) {
-			String sql = "update account set balance = ? where accountNumber = ?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setDouble(1, account.getBalance());
-			//statement.setDouble(2, transaction.getAmount());
-			statement.setString(2, account.getAccountNumber());
-			statement.executeUpdate();
-		}
-
-	}
+	
 
 
 //	//Transfer Amount from one account to another

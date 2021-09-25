@@ -22,18 +22,18 @@ public class TransactionMenu {
 		Scanner scanner = BankApp.getScanner();
 		type = scanner.next();
 		System.out.println("Enter the type of transaction : " + type);
-		if(type == "D") {
-			DepositMenu depositMenu = new DepositMenu("Deposit");
-			depositMenu.action();
-			balance = balance + depositMenu.getAmount();
-		}
-		else if (type == "W") {
-			DepositMenu depositMenu = new DepositMenu;
-			depositMenu.action();
-			balance = balance - withdrawlMenu.getAmount();
-		} else {
-			System.out.println("Please enter 'W' for withdrawl and 'D' for Deposit");
-		}
+//		if(type == "D") {
+//			DepositMenu depositMenu = new DepositMenu("Deposit");
+//			depositMenu.action();
+//			balance = balance + depositMenu.getAmount();
+//		}
+//		else if (type == "W") {
+//			DepositMenu depositMenu = new DepositMenu;
+//			depositMenu.action();
+//			balance = balance - withdrawlMenu.getAmount();
+//		} else {
+//			System.out.println("Please enter 'W' for withdrawl and 'D' for Deposit");
+//		}
 		
 	}
 		public void printTransactionStatements() {
