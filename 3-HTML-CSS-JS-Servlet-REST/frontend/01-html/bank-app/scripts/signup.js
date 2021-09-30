@@ -39,10 +39,10 @@ async function addCustomer(){
 
     //if(valid){
         let customer = {
-            firstName: form.first_name.value,
-            lastName: form.last_name.value,
-            email: form.email.value,
-            password: form.password.value
+            firstName: firstName.value,
+            lastName: lastName.value,
+            email: email.value,
+            password: password.value
         };
     //};
 
