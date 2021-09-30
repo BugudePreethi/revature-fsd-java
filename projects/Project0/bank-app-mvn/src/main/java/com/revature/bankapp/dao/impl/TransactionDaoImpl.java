@@ -32,12 +32,11 @@ public class TransactionDaoImpl implements TransactionDao {
 	//Update account after deposit and transaction
 		@Override
 		public void update(Account account) throws SQLException {
-			WithdrawDepositForm wdForm = new WithdrawDepositForm("Form");
 			try (Connection connection = Util.getConnection()) {
 				String sql = "update account set balance = ? where id = ?";
 				PreparedStatement statement = connection.prepareStatement(sql);
-				statement.setDouble(1, wdForm.getBalance());
-				statement.setInt(2, wdForm.getAccount_id());
+				statement.setDouble(1, account.getBalance());
+				statement.setInt(2, account.getId());
 				statement.executeUpdate();
 			}
 
@@ -49,9 +48,10 @@ public class TransactionDaoImpl implements TransactionDao {
 		List<Transaction> transactionList = new ArrayList<>(); 
 		Transaction transaction = new Transaction();
 		try(Connection connection = Util.getConnection()){
-			String sql = "SELECT * FROM transaction";
+			String sql = "SELECT * FROM transaction/* where account_id = ?*/";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			//statement.setInt(1, transaction.getAccount_id());
+//			statement.setInt(1, transaction.getAccount_id());
+//			System.out.println(transaction.getAccount_id());
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
 				transaction.setAccount_id(resultSet.getInt("account_id"));

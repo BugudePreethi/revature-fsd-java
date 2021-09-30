@@ -70,13 +70,13 @@ public class WithdrawDepositForm extends Form {
 		accountList.forEach(System.out::println);
 		Scanner scanner = BankApp.getScanner();
 		// Choose whether withdraw or deposit
-		System.out.println("Enter 'W' for withdrawl and 'D' for Deposit");
+		System.out.print("Enter 'W' for withdrawl and 'D' for Deposit : ");
 		type = scanner.nextLine().charAt(0);
 		// Choose account
 	    System.out.println("Choose an account_id from the given list of accounts.");
 		System.out.print("Enter the account_id : ");
 		int id = scanner.nextInt();
-		System.out.print(id);
+		account.setId(id);
 		transaction.setAccount_id(id);
 		transaction.setType(type);
 		// Enter the amount
@@ -84,11 +84,10 @@ public class WithdrawDepositForm extends Form {
 		double amount = scanner.nextDouble();
 		transaction.setAmount(amount);
 	}
-
+	Account account = new Account();
 	@Override
 	public void action() {
 		// Get balance
-		System.out.print("Balance : ");
 		AccountDao bDao = new AccountDaoImpl();
 		try {
 			balance = bDao.showBalance(transaction.getAccount_id());
@@ -102,27 +101,27 @@ public class WithdrawDepositForm extends Form {
 		if (type == 'D') {
 			balance = balance + amount;
 			System.out.print("The total balance is ");
-			System.out.print(balance);
+			System.out.println(balance);
 		}else if (type == 'W') {
 			if (balance >= amount) {
 				balance = balance - amount;
 				System.out.print("The total balance is ");
-				System.out.print(balance);
+				System.out.println(balance);
 			} else {
 				System.out.println("Insufficient Amount");
 			}
 		}
-		System.out.println(balance);
-		System.out.print(transaction.getAccount_id());
+		transaction.setBalance(balance);
+		
+		account.setBalance(balance);
 		TransactionDao tDao = new TransactionDaoImpl();
-//		/*try {
-//			tDao.create(transaction);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			System.out.println("Failed inserting transactions");
-//		}*/
-//		
-		Account account = new Account(); 
+		try {
+			tDao.create(transaction);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Failed inserting transactions");
+		}
+		
 		try { 
 			tDao.update(account);
 			System.out.println("Account updated successfully");
