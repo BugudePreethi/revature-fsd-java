@@ -15,11 +15,14 @@ public class GetEmployeeDemo {
         session.beginTransaction();
         
         Employee e = session.get(Employee.class, 1);
+        System.out.println("Transient at department and skill");
+        System.out.println(e.getName());
+        System.out.println("Transient at skill");
+        System.out.println(e.getDepartment());
+        System.out.println("Transient are removed");
+        System.out.println(e.getSkillList());
+        System.out.println("Employee Skill");
         System.out.println(e);
-//        System.out.println(e.getName());
-//        System.out.println(e.getDepartment());
-//        System.out.println(e.getSkillList());
-        
         session.getTransaction().commit();
         
         session.close();

@@ -1,3 +1,32 @@
+.banner-image{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url("https://media.istockphoto.com/photos/person-holds-a-smartphone-with-mobile-banking-icons-projection-picture-id1304484797");
+    background-position: center;
+    background-size: cover; 
+    position: absolute;
+}
+
+.dropdown-item{
+    color: black;
+}
+
+label{
+    color: white;
+}
+
+form{
+    width: 450px;
+    margin: auto;
+}
+h1{
+    color: tomato;
+}
+
+.form-check{
+    font-size: 20px;
+}
+
 .card{
     max-width: 40rem;
     margin-right: 1rem;

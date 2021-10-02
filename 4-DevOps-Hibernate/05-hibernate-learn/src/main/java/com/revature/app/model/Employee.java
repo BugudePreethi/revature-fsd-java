@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,6 +37,7 @@ public class Employee {
     @JoinColumn(name="department_id")
 	private Department department;
     
+//    @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
     @JoinTable(name="employee_skill",
             joinColumns = @JoinColumn(name="employee_id"),

@@ -1,94 +1,54 @@
-let signup = document.getElementById("submit");
-let firstName = document.getElementById("first_name");
-let lastName = document.getElementById("last_name");
-let email = document.getElementById("email");
-let password = document.getElementById("password");
+let signupButton = document.getElementById("signup");
+let success = document.getElementById("success");
 let error = document.getElementById("error");
-
+let form = document.forms[0];
+success.style.display = "none";
 error.style.display = "none";
 
-let firstNameError = document.getElementById("firstNameError");
-let valid = true;
+var form1 = document.querySelector('.needs-validation');
 
-signup.addEventListener("click", function(){
-
-    if(valid){
-        addCustomer();
+form1.addEventListener('submit', function(event){
+    if(form1.checkValidity() === false){
+        event.preventDefault();
+        event.stopPropagation();
     }
-     
-    // if(firstName.value == ""){
-    //     let firstNameError = document.getElementById("firstNameError");
-    //     firstNameError.innerText = "First Name is required";
-    //     return;
-    // }else if(email.value == ""){
-    //     let emailError = document.getElementById("emailError");
-    //     emailError.innerText = "Email is required";
-    //     return;
-    // }else if(password.value == ""){
-    //     let passwordError = document.getElementById("passwordError");
-    //     passwordError.innerText = "Password is required";
-    //     return;
-    // } else{
-    //     addCustomer();
-    // }
+    form1.classList.add('was-validated');
+})
 
-    
+
+signupButton.addEventListener("click", function(){
+    addCustomer();
 });
 
 async function addCustomer(){
-
-    //if(valid){
-        let customer = {
-            firstName: firstName.value,
-            lastName: lastName.value,
-            email: email.value,
-            password: password.value
-        };
-    //};
+    let customer = {
+        firstName: form.first_name.value,
+        lastName: form.last_name.value,
+        email: form.email.value,
+        password: form.password.value
+    };
 
     var options = {
         method: 'POST',
-        headers: { "Content-Type": "application/json"},
+        headers:{ "Content-Type": "application/json"},
         body: JSON.stringify(customer)
     };
 
-    try {
+    try{
         let response = await fetch("http://localhost:8080/bank-app-rest/customers", options);
-        window.location.href = "login.html";
-    } catch (err) {
+        console.log("after getting data");
+        clearFormData();
+        console.log("after clearing form");
+        success.style.display = "block";
+        success.innerText = "Customer added successfully.";
+    } catch(err){
         error.style.display = "block";
+        error.innerText = "Failed to add customer. Retry or report to site administrator."
     }
 }
-
-firstName.addEventListener("keyup",function(){
-    if(firstName.value != "" && firstName.value.length > 20){
-        let firstNameError = document.getElementById("firstNameError");
-        firstNameError.innerText = "First Name cannot exceed 20 characters";
-        return;
-    }
-
-    if(firstName.value != "" && firstName.value.length <= 20){
-        let firstNameError = document.getElementById("firstNameError");
-        firstNameError.innerText = "";
-        return;
-    }
-
-    if (firstName.value != "") {
-        let pattern = /^[A-Za-z]+$/;
-        console.log(firstName.value.match(pattern));
-        if (!firstName.value.match(pattern)) {
-            firstNameError.innerText = "Numbers not allowed";
-        }
-    }
-
-});
-email.addEventListener("keyup",function(){
-    if (email.value != "") {
-        let pattern = /[a-z0-9._%+-]+@[a-z0-9.9.-]+\.[a-z]{2,}$/;
-        console.log(email.value.match(pattern));
-        if (!email.value.match(pattern)) {
-            emailError.innerText = "Please enter a valid email";
-        }
-    }
-
-});
+function clearFormData(){
+    form.first_name.value = "";
+    form.last_name.value = "";
+    form.email.value = "";
+    form.password.value = "";
+}
