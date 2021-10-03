@@ -51,7 +51,6 @@ public class CustomerDaoImpl implements CustomerDao{
 				customer.setEmail(resultSet.getString("email"));
 				customer.setPassword(resultSet.getString("password"));
 				
-				//customer.setMobileNumber(resultSet.getDouble("mobileNumber"));
 				return customer;
 			}
 		}
