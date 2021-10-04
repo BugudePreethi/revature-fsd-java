@@ -5,21 +5,9 @@ let form = document.forms[0];
 success.style.display = "none";
 error.style.display = "none";
 
-var form1 = document.querySelector('.needs-validation');
-
-
 login.addEventListener("click", function(){
-    form1.addEventListener('submit', function(event){
-        if(form1.checkValidity() === false){
-            event.preventDefault();
-            event.stopPropagation();
-            console.log("validation was failed");
-        } else{
-            form1.classList.add('was-validated');
-            getEmployee();
-            window.open('customer-details.html');
-        }
-    })
+    getEmployee();
+    window.location.href="customer-details.html";
 });
 
 async function getEmployee(){

@@ -5,21 +5,9 @@ let form = document.forms[0];
 success.style.display = "none";
 error.style.display = "none";
 
-var form1 = document.querySelector('.needs-validation');
-
-
 loginButton.addEventListener("click", function(){
-    form1.addEventListener('submit', function(event){
-        if(form1.checkValidity() === false){
-            event.preventDefault();
-            event.stopPropagation();
-            console.log("validation was failed");
-        } else{
-            form1.classList.add('was-validated');
-            getCustomer();
-            window.open('create-account.html');
-        }
-    })
+    getCustomer();
+    window.location.href="accounts.html";
 });
 
 async function getCustomer(){
