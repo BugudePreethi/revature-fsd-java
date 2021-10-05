@@ -5,21 +5,8 @@ let form = document.forms[0];
 success.style.display = "none";
 error.style.display = "none";
 
-var form1 = document.querySelector('.needs-validation');
-
-
 signupButton.addEventListener("click", function(){
-    form1.addEventListener('submit', function(event){
-        if(form1.checkValidity() === false){
-            event.preventDefault();
-            event.stopPropagation();
-            console.log("validation was failed");
-        } else{
-            form1.classList.add('was-validated');
-            addCustomer();
-            window.open('customer-login.html');
-        }
-    })
+    addCustomer();
 });
 
 async function addCustomer(){
@@ -42,7 +29,7 @@ async function addCustomer(){
         clearFormData();
         console.log("after clearing form");
         success.style.display = "block";
-        success.innerText = "Customer added successfully.";
+        success.innerText = "Customer added successfully.Please login.";
     } catch(err){
         error.style.display = "block";
         error.innerText = "Failed to add customer. Retry or report to site administrator."

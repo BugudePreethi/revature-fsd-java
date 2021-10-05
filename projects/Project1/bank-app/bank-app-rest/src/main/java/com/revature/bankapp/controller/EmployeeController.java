@@ -42,14 +42,15 @@ public class EmployeeController {
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response list() {
-			Employee employeeList;
+			LOGGER.info("Controller Start");
+			Employee employee;
 			try {
-				employeeList = dao.getEmployeeByEmail("john@gmail.com");
+				employee = dao.getEmployeeByEmail("john@gmail.com");
 				return Response
 						.ok()
-						.entity(employeeList)
+						.entity(employee)
 						.build();
-			} catch (SQLException e) {
+			} catch (AppException e) {
 				return Response.status(500).build();
 			}
 

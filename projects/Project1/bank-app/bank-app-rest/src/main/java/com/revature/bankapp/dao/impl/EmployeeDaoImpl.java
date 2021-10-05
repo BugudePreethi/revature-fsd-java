@@ -42,7 +42,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee getEmployeeByEmail(String email) throws SQLException {
+	public Employee getEmployeeByEmail(String email) throws AppException {
+		LOGGER.info("Login Start");
 		try(Connection connection = Util.getConnection()) {
 			String sql = "SELECT * FROM bankapp.employee where email = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -56,6 +57,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employee.setPassword(resultSet.getString("password"));
 				return employee;
 			}
+		} catch(SQLException e) {
+			LOGGER.error("Error getting customer", e);
+			throw new AppException(e);
 		}
 		return null;
 	}

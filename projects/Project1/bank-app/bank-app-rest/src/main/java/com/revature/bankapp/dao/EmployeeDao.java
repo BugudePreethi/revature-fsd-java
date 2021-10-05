@@ -10,7 +10,7 @@ import com.revature.bankapp.model.Employee;
 
 public interface EmployeeDao {
 	void create(Employee employee) throws AppException;	
-	Employee getEmployeeByEmail(String email) throws SQLException;
+	Employee getEmployeeByEmail(String email) throws AppException;
 	List<Account> list() throws SQLException;
 	List<Customer> customerList() throws SQLException;
 }

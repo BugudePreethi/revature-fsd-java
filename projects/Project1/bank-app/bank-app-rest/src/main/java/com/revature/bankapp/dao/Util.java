@@ -12,7 +12,7 @@ public class Util {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Util.class);
 	
 	public static Connection getConnection() throws SQLException{
-		LOGGER.info("Start");
+		LOGGER.info("Util Start");
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {

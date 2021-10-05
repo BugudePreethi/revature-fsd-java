@@ -16,10 +16,11 @@ import com.revature.bankapp.model.Customer;
 public class CustomerDaoImpl implements CustomerDao{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDaoImpl.class);
+	private Customer customer;
 
     @Override 
 	public void create(Customer customer) throws AppException {
-    	LOGGER.info("Start");
+    	LOGGER.info("Signup Start");
     	LOGGER.debug("{}",customer);
 		try(Connection connection = Util.getConnection()) {
 			String sql = "insert into customer (firstName, lastName, email, password) values (?, ?, ?, ?)";
@@ -37,22 +38,25 @@ public class CustomerDaoImpl implements CustomerDao{
 	}
 
 	@Override
-	public Customer getCustomerByEmail(String email) throws SQLException {
+	public Customer getCustomerByEmail(String email) throws AppException {
+		LOGGER.info("Login Start");
 		try(Connection connection = Util.getConnection()) {
 			String sql = "SELECT * FROM bankapp.customer where email = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, email);
 			ResultSet resultSet = statement.executeQuery();	
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				Customer customer = new Customer();
 				customer.setId(resultSet.getInt("id"));
 				customer.setFirstName(resultSet.getString("firstName"));
 				customer.setLastName(resultSet.getString("lastName"));
 				customer.setEmail(resultSet.getString("email"));
 				customer.setPassword(resultSet.getString("password"));
-				
 				return customer;
 			}
+		} catch(SQLException e) {
+			LOGGER.error("Error getting customer", e);
+			throw new AppException(e);
 		}
 		return null;
 	}

@@ -35,13 +35,13 @@
         </nav>
         <div id="success" class="alert alert-success"></div>
         <div id="error" class="alert alert-danger"></div>
-        <form method="POST" class="needs-validation" novalidate>
+        <form>
           <div class="form-group">
             <h1>SIGNUP</h1>
           </div>
           <div class="form-group">
             <label for="first_name">First Name: </label>
-            <input type="text" name="first_name" id="first_name" class="form-control" required>
+            <input type="text" name="first_name" id="first_name" class="form-control" pattern="[A-Za-z]" required>
           </div>
           <div class="form-group">
             <label for="last_name">Last Name: </label>
@@ -56,7 +56,7 @@
             <input type="text" name="password" id="password" class="form-control" required>
           </div>
           <div>
-            <input type="submit" class="btn btn-primary" value="SignUp" id="signup">
+            <input type="button" class="btn btn-primary" value="SignUp" id="signup">
           </div>
         </form>
       </div>

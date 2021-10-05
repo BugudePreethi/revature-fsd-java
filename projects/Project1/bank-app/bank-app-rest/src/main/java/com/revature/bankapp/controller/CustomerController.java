@@ -1,8 +1,5 @@
 package com.revature.bankapp.controller;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -44,16 +41,13 @@ public class CustomerController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response list() {
-		Customer customerList;
+		LOGGER.info("Controller Start");
+		Customer customer;
 		try {
-			customerList = dao.getCustomerByEmail("john@xyz.com");
-			return Response
-					.ok()
-					.entity(customerList)
-					.build();
-		} catch (SQLException e) {
+			customer = dao.getCustomerByEmail("john@xyz.com");
+			return Response.ok().entity(customer).build();
+		} catch (AppException e) {
 			return Response.status(500).build();
 		}
-
 	}
 }

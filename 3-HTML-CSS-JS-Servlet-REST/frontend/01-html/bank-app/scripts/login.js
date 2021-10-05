@@ -1,5 +1,4 @@
 let loginButton = document.getElementById("login");
-let success = document.getElementById("success");
 let error = document.getElementById("error");
 let form = document.forms[0];
 success.style.display = "none";
@@ -7,7 +6,6 @@ error.style.display = "none";
 
 loginButton.addEventListener("click", function(){
     getCustomer();
-    window.location.href="accounts.html";
 });
 
 async function getCustomer(){
@@ -27,8 +25,7 @@ async function getCustomer(){
         console.log("after getting data");
         clearFormData();
         console.log("after clearing form");
-        success.style.display = "block";
-        success.innerText = "Login successful.";
+        window.location.href="accounts.html";
     } catch(err){
         error.style.display = "block";
         error.innerText = "Failed to get customer. Retry or report to site administrator."
