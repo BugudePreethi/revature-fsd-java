@@ -1,0 +1,55 @@
+.movie-title {
+    font-size: 19px;
+    font-weight: 500
+  }
+  
+  .movie-genre {
+    font-size: 12px;
+    font-weight: bold;
+    color: blue
+  }
+  
+  .movie-details {
+    font-size: 12px
+  }
+  
+  .booking-open {
+    font-size: 12px;
+    border: 1px solid green;
+    color: green;
+    padding: 3px;
+    font-weight: bold
+  }
+  
+  .booking-closed {
+    font-size: 12px;
+    border: 1px solid red;
+    color: red;
+    padding: 3px;
+    font-weight: bold
+  }
+  
+  .movie-card {
+    padding: 15px;
+    border: 2px solid rgb(218, 211, 211);
+    width: 25%;
+    float: left;
+    margin: 15px
+  }
+  
+  .favorite {
+    color: #CCCCCC;
+    cursor: pointer;
+    float:right
+  }
+  
+  .favorite:hover {
+    color: red;
+    cursor: pointer;
+  }
+  
+  .favorite-selected {
+    color: red;
+    float: right;
+    cursor: pointer;
+  }

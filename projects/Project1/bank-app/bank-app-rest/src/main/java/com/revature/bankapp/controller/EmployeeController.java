@@ -1,7 +1,5 @@
 package com.revature.bankapp.controller;
 
-import java.sql.SQLException;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.revature.bankapp.dao.EmployeeDao;
 import com.revature.bankapp.dao.impl.EmployeeDaoImpl;
 import com.revature.bankapp.exception.AppException;
-import com.revature.bankapp.model.Customer;
 import com.revature.bankapp.model.Employee;
 
 @Path("/employees")
