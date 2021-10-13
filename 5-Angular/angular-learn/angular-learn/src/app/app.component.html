@@ -1,2 +1,9 @@
-<h1>Hello</h1>
-<app-movie></app-movie>
+<strong>ng-learn app</strong>&nbsp;&nbsp;&nbsp;
+<a routerLink="login" routerLinkActive="active-link">Login</a>&nbsp;
+<a routerLink="movie-list" routerLinkActive="active-link">Movies</a>&nbsp;
+<a routerLink="edit-movie" routerLinkActive="active-link">Edit Movie</a>&nbsp;
+<a routerLink="profile" routerLinkActive="active-link">My Profile</a>&nbsp;
+<a routerLink="http" routerLinkActive="active-link">HTTP Client Demo</a>&nbsp;
+<a *ngIf="authService.isLoggedIn" (click)="logout()">Logout</a>&nbsp;
+<hr>
+<router-outlet></router-outlet>

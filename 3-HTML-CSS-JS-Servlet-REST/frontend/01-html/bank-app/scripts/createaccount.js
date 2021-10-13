@@ -1,4 +1,3 @@
-//let balance = document.getElementById("balance");
 let createButton = document.getElementById("add");
 let success = document.getElementById("success");
 let error = document.getElementById("error");
@@ -7,13 +6,15 @@ success.style.display = "none";
 error.style.display = "none";
 
 createButton.addEventListener("click", function(){
-    addAccount();
+    if(form.balance.value >= 2000){
+        addAccount();
+    }
 });
 
 async function addAccount(){
     let account = {
         accountNumber: form.account_number.value,
-        customer_id: 1,
+        customerId: 1,
         balance: form.balance.value,
         approved: "N"
     };

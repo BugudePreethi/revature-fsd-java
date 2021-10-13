@@ -8,7 +8,7 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String password;
-	private List<Account> accountList;
+	private Account account;
 	
 	public Customer() {		
 	}
@@ -52,17 +52,18 @@ public class Customer {
 		this.id = id;
 	}
 
-	public List<Account> getAccountList() {
-		return accountList;
+	public Account getAccount() {
+		return account;
 	}
-	public void setAccountList(List<Account> accountList) {
-		this.accountList = accountList;
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", account=" + account + "]";
 	}
 
 }

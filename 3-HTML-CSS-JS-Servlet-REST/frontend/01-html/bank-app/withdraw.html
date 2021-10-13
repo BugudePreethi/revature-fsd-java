@@ -43,7 +43,9 @@
             </ul>
           </div>
         </nav>
-        <form method="POST" action="accounts.html">
+        <div id="success" class="alert alert-success"></div>
+        <div id="error" class="alert alert-danger"></div>
+        <form>
           <div class="form-group">
             <h1>WITHDRAWL FORM</h1>
           </div>
@@ -56,10 +58,11 @@
             <input type="number" name="amount" id="amount" class="form-control" required>
           </div>
           <div>
-            <input type="submit" class="btn btn-primary" value="Add" id="add">
+            <input type="button" class="btn btn-primary" value="Add" id="add">
           </div>
         </form>
       </div>
+      <script src="scripts/withdraw.js"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

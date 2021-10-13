@@ -41,22 +41,19 @@ public class AccountDaoImpl implements AccountDao{
 
 //	//List of Accounts of a Customer
 	@Override
-	public List<Account> list() throws AppException {
+	public List<Account> list(int id) throws AppException {
 		LOGGER.info("Create account Start"); 
 		List<Account> accountList = new ArrayList<>();
 		try(Connection connection = Util.getConnection()){
-			String sql = "SELECT * FROM customer c inner join account a on a.customer_id = (c.id=1);";
+			String sql = "SELECT * FROM customer c inner join account a on a.customer_id = c.id where c.id = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
 				Customer customer = new Customer();
 				customer.setId(resultSet.getInt("id"));
-//				customer.setFirstName(resultSet.getString("firstName"));
-//				customer.setLastName(resultSet.getString("lastName"));
-//				customer.setEmail(resultSet.getString("email"));
-//				customer.setPassword(resultSet.getString("password"));
 				Account account = new Account();
-				account.setId(resultSet.getInt("id"));
+				account.setId(resultSet.getInt("a.id"));
 				account.setAccountNumber(resultSet.getString("accountNumber"));
 				account.setBalance(resultSet.getDouble("balance"));
 				account.setApproved(resultSet.getString("approved"));
@@ -69,10 +66,10 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		return accountList;
 	}
-//
+
 //	//View balance of specific account
 //	@Override
-//	public double showBalance(int account_id) throws SQLException {
+//	public double showBalance(int account_id) throws AppException {
 //		double balanceInDB = 0;
 //		try(Connection connection = Util.getConnection()){
 //			String sql = "SELECT balance FROM bankapp.account where id = ?";
@@ -82,52 +79,41 @@ public class AccountDaoImpl implements AccountDao{
 //			if (resultSet.next()) {
 //				balanceInDB = (double) resultSet.getDouble("balance");			
 //			}
+//		} catch(SQLException e) {
+//			LOGGER.error("Error in getting balance", e);
+//			throw new AppException(e);
 //		}
 //		return balanceInDB;
 //	}
-//	
-//
-//
-////	//Transfer Amount from one account to another
-////	@Override
-////	public void update(Account account) throws SQLException {
-////		try (Connection connection = Util.getConnection()) {
-////			String sql = "update account set balance = ? where accountNumber = ?";
-////			PreparedStatement statement = connection.prepareStatement(sql);
-////			TransferForm transferForm = new TransferForm("Form");
-////			statement.setDouble(1, transferForm.getBalance());
-////			statement.setString(2, transferForm.getAccountNumber());
-////			statement.executeUpdate(sql);
-////			String sql1 = "update account set balance = ? where accountNumber = ?";
-////			PreparedStatement statement1 = connection.prepareStatement(sql1);
-////			TransferForm transferForm1 = new TransferForm("Form");
-////			statement1.setDouble(1, transferForm1.getBalance1());
-////			statement1.setString(2, transferForm1.getAccountNumber1());			
-////			statement.executeUpdate(sql1);
-////		}
-////	}
-////	
-//	//Approve account 
-//	@Override
-//	public void approveAccount(String accountNumber) throws SQLException {
-//		try(Connection connection = Util.getConnection()){
-//			String sql ="update account set approved = 'Y' where accountNumber = ?";
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			statement.setString(1, accountNumber);
-//			statement.executeUpdate();
-//		}
-//	}
-//	
-//	//Reject Account
-//	@Override
-//	public void rejectAccount(String accountNumber) throws SQLException {
-//		try(Connection connection = Util.getConnection()){
-//			String sql ="update account set approved = 'R' where accountNumber = ?";
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			statement.setString(1, accountNumber);
-//			statement.executeUpdate();
-//		}
-//	}
+
+	
+	//Approve account 
+	@Override
+	public void approveAccount(String accountNumber) throws AppException {
+		try(Connection connection = Util.getConnection()){
+			String sql ="update account set approved = 'Y' where accountNumber = ?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, "1000014");
+			statement.executeUpdate();
+		} catch(SQLException e) {
+			LOGGER.error("Error approving account", e);
+			throw new AppException(e);
+		}
+	}
+	
+	//Reject Account
+	@Override
+	public void rejectAccount(String accountNumber) throws AppException {
+		try(Connection connection = Util.getConnection()){
+			String sql ="update account set approved = 'R' where accountNumber = ?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, accountNumber);
+			statement.executeUpdate();
+		} catch(SQLException e) {
+			LOGGER.error("Error rejecting account", e);
+			throw new AppException(e);
+		}
+	}
 	
 	
 	

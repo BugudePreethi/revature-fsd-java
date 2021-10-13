@@ -1,0 +1,9 @@
+<h1>My Profile</h1> 
+
+<div *ngIf="user">
+    <img src="{{user.avatar}}">
+    <div class="name">{{user.first_name}} {{user.last_name}}</div>
+    <div class="email">{{user.email}}</div>
+</div>
+
+<div class="error" *ngIf="error">System error. Retry or contact administrator.</div>

@@ -12,6 +12,11 @@
   .movie-details {
     font-size: 12px
   }
+
+  .movie-year{
+    color: darkgrey;
+    font-size: 12px;
+  }
   
   .booking-open {
     font-size: 12px;
@@ -34,7 +39,8 @@
     border: 2px solid rgb(218, 211, 211);
     width: 25%;
     float: left;
-    margin: 15px
+    margin: 15px;
+    height: 150px
   }
   
   .favorite {

@@ -6,28 +6,32 @@ success.style.display = "none";
 error.style.display = "none";
 
 loginButton.addEventListener("click", function(){
+    console.log("Before get");
     getCustomer();
-    window.location.href="accounts.html";
+    console.log("After get");
 });
 
 async function getCustomer(){
+    console.log("In get");
     let customer = {
         email: form.email.value,
         password: form.password.value
     };
 
     var options = {
-        method: 'GET',
+        method: 'POST',
         headers:{ "Content-Type": "application/json"},
         body: JSON.stringify(customer)
     };
 
     try{
-        let response = await fetch("http://localhost:8080/bank-app-rest/customers", options);
+        let response = await fetch("http://localhost:8080/bank-app-rest/authenticate", options);
         console.log("after getting data");
         clearFormData();
         console.log("after clearing form");
+        window.location.href="accounts.html";
     } catch(err){
+        console.log(err);
         error.style.display = "block";
         error.innerText = "Failed to get customer. Retry or report to site administrator."
     }

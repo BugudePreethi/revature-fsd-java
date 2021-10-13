@@ -2,6 +2,7 @@ let signupButton = document.getElementById("signup");
 let success = document.getElementById("success");
 let error = document.getElementById("error");
 let form = document.forms[0];
+
 success.style.display = "none";
 error.style.display = "none";
 

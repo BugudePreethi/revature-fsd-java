@@ -15,10 +15,10 @@ import com.revature.bankapp.model.Customer;
 
 public class CustomerDaoImpl implements CustomerDao{
 	
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDaoImpl.class);
-	private Customer customer;
 
-    @Override 
+	@Override 
 	public void create(Customer customer) throws AppException {
     	LOGGER.info("Signup Start");
     	LOGGER.debug("{}",customer);
@@ -40,25 +40,26 @@ public class CustomerDaoImpl implements CustomerDao{
 	@Override
 	public Customer getCustomerByEmail(String email) throws AppException {
 		LOGGER.info("Login Start");
+		LOGGER.debug("{}", email);
+		Customer customer = null;
 		try(Connection connection = Util.getConnection()) {
 			String sql = "SELECT * FROM bankapp.customer where email = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, email);
 			ResultSet resultSet = statement.executeQuery();	
-			while (resultSet.next()) {
-				Customer customer = new Customer();
+			if (resultSet.next()) {
+				customer = new Customer();
 				customer.setId(resultSet.getInt("id"));
 				customer.setFirstName(resultSet.getString("firstName"));
 				customer.setLastName(resultSet.getString("lastName"));
 				customer.setEmail(resultSet.getString("email"));
 				customer.setPassword(resultSet.getString("password"));
-				return customer;
 			}
 		} catch(SQLException e) {
 			LOGGER.error("Error getting customer", e);
 			throw new AppException(e);
 		}
-		return null;
+		return customer;
 	}
 
 }

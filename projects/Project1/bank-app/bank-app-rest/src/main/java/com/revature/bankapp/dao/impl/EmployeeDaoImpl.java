@@ -16,6 +16,7 @@ import com.revature.bankapp.exception.AppException;
 import com.revature.bankapp.model.Account;
 import com.revature.bankapp.model.Customer;
 import com.revature.bankapp.model.Employee;
+import com.revature.bankapp.model.Transaction;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	
@@ -58,38 +59,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				return employee;
 			}
 		} catch(SQLException e) {
-			LOGGER.error("Error getting customer", e);
+			LOGGER.error("Error getting employee", e);
 			throw new AppException(e);
 		}
 		return null;
 	}
 
 	@Override
-	public List<Account> list() throws SQLException {
-		List<Account> accountList = new ArrayList<>();
-		try(Connection connection = Util.getConnection()){
-			String sql = "select * from account where approved = 'N'";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			ResultSet resultSet = statement.executeQuery();
-			while(resultSet.next()) {
-				Account account = new Account();
-				account.setId(resultSet.getInt("id"));
-				account.setAccountNumber(resultSet.getString("accountNumber"));
-				account.setCustomerId(resultSet.getInt("customer_id"));
-				account.setBalance(resultSet.getDouble("balance"));
-				accountList.add(account);
-			}
-			accountList.forEach(System.out::println);
-		}
-		return null;
-	}
-
-	@Override
-	public List<Customer> customerList() throws SQLException {
+	public List<Customer> list() throws AppException {
 		List<Customer> customerList = new ArrayList<>();
-		List<Account> accountList = new ArrayList<>();
 		try(Connection connection = Util.getConnection()){
-			String sql ="select customer_id,firstName,lastName,email,accountNumber,balance,approve from customer c inner join account a where a.customer_id = c.id";
+			String sql = "SELECT firstName, lastName, email, accountNumber,balance, approved FROM bankapp.customer c inner join account a where a.customer_id = c.id and approved = 'Y'";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
@@ -97,16 +77,41 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				customer.setFirstName(resultSet.getString("firstName"));
 				customer.setLastName(resultSet.getString("lastName"));
 				customer.setEmail(resultSet.getString("email"));
-				customerList.add(customer);
 				Account account = new Account();
 				account.setAccountNumber(resultSet.getString("accountNumber"));
 				account.setBalance(resultSet.getDouble("balance"));
-				account.setCustomerId(resultSet.getInt("customer_id"));
 				account.setApproved(resultSet.getString("approved"));
-				accountList.add(account);
+				customer.setAccount(account);
+				customerList.add(customer);
 			}
+		} catch(SQLException e) {
+			LOGGER.error("Error getting list of employees", e);
+			throw new AppException(e);
 		}
-		return null;
+		return customerList;
+	}
+
+	@Override
+	public List<Transaction> transactionList() throws AppException {
+		List<Transaction> transactionList = new ArrayList<>();
+		try(Connection connection = Util.getConnection()){
+			String sql ="SELECT c.firstName, c.email, a.accountNumber, t.amount, t.type, t.balance FROM bankapp.transaction t inner join account a inner join customer c where a.customer_id=c.id and t.account_id=a.id and a.accountNumber=?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, "100005");
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				Transaction transaction = new Transaction();
+				transaction.setAccountNumber(resultSet.getString("a.accountNumber"));
+				transaction.setAmount(resultSet.getDouble("t.amount"));
+				transaction.setType(resultSet.getString("t.type").charAt(0));
+				transaction.setBalance(resultSet.getDouble("t.balance"));
+				transactionList.add(transaction);
+			}
+			transactionList.forEach(System.out::println);
+		} catch(SQLException e) {
+			LOGGER.error("Error getting transaction list");
+		}
+		return transactionList;
 	}
 	
 }

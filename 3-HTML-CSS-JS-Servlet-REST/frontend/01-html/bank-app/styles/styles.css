@@ -29,10 +29,13 @@ h1{
 
 .card{
     max-width: 40rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin: 0.5rem;
+    height: 150px;
+    width: 350px;
+    float: left;
 }
 .validation-error{
     color: red;
     font-size: 0.5rem;
 }
+
