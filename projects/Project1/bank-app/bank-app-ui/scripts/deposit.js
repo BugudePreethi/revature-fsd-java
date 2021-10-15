@@ -1,3 +1,5 @@
+const urlParams = new URLSearchParams(window.location.search);
+const account_id = urlParams.get('id');
 let addButton = document.getElementById("add");
 let success = document.getElementById("success");
 let error = document.getElementById("error");
@@ -11,8 +13,8 @@ addButton.addEventListener("click", function(){
 
 async function deposit(){
     let transaction = {
-        accountNumber: form.account_number.value,
-        amount: form.amount.value
+        amount: form.amount.value,
+        type: 'D'
     };
 
     var options = {

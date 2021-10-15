@@ -67,5 +67,4 @@ public class AccountDaoImpl implements AccountDao{
 		return accountList;
 	}
 	
-	
 }
