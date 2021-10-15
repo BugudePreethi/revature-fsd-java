@@ -15,6 +15,11 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService) { }
 
   ngOnInit(): void {
+    this.profileService.getDepartments().subscribe(
+      response => {
+        console.log(response);
+      }
+    );
     let observable: Observable<any> = this.profileService.getUser();
     observable.subscribe(response => {
       this.user = response.data;

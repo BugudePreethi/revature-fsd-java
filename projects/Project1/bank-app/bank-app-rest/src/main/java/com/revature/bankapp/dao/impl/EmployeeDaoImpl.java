@@ -92,24 +92,25 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public List<Transaction> transactionList() throws AppException {
+	public List<Transaction> transactionList(String accountNumber) throws AppException {
 		List<Transaction> transactionList = new ArrayList<>();
 		try(Connection connection = Util.getConnection()){
-			String sql ="SELECT c.firstName, c.email, a.accountNumber, t.amount, t.type, t.balance FROM bankapp.transaction t inner join account a inner join customer c where a.customer_id=c.id and t.account_id=a.id and a.accountNumber=?";
+			String sql ="SELECT a.accountNumber, t.amount, t.type, t.balance FROM bankapp.transaction t inner join account a inner join customer c on a.customer_id = c.id and t.account_id = a.id where a.accountNumber = ?";
 			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, "100005");
+			statement.setString(1, accountNumber);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
 				Transaction transaction = new Transaction();
+				//transaction.setAccount_id(resultSet.getInt("a.id"));
 				transaction.setAccountNumber(resultSet.getString("a.accountNumber"));
 				transaction.setAmount(resultSet.getDouble("t.amount"));
 				transaction.setType(resultSet.getString("t.type").charAt(0));
 				transaction.setBalance(resultSet.getDouble("t.balance"));
 				transactionList.add(transaction);
 			}
-			transactionList.forEach(System.out::println);
 		} catch(SQLException e) {
-			LOGGER.error("Error getting transaction list");
+			LOGGER.error("Error getting transaction list", e);
+			throw new AppException(e);
 		}
 		return transactionList;
 	}

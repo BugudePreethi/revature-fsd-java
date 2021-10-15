@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -73,13 +74,13 @@ public class EmployeeController {
 	
 	//Getting Transaction List
 	@GET
-	@Path("/transactions")
+	@Path("/transactions/{accountNumber}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response transactionList() {
+	public Response transactionList(@PathParam("accountNumber") String accountNumber) {
 		LOGGER.info("Transaction List Start");
 		List<Transaction> transactionList;
 		try {
-			transactionList = dao.transactionList();
+			transactionList = dao.transactionList(accountNumber);
 			return Response.ok().entity(transactionList).build();
 		} catch(AppException e) {
 			return Response.status(500).build();

@@ -2,7 +2,9 @@ package com.revature.bankapp.controller;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -33,9 +35,24 @@ public class TransactionController {
 		LOGGER.info("account Id : " + transaction.getAccount_id());
 		List<Transaction> transactionList;
 		try {
-			transactionList = dao.list();
+			transactionList = dao.list(id);
 			return Response.ok().entity(transactionList).build();
 		} catch(AppException e) {
+			return Response.status(500).build();
+		}
+	}
+	
+	//For inserting deposit and withdraw
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response create(Transaction transaction) {
+		LOGGER.info("Deposit/Withdraw Start");
+		LOGGER.debug("{}", transaction);
+		try {
+			dao.create(transaction);
+			LOGGER.info("End");
+			return Response.ok().build();
+		} catch (AppException e) {
 			return Response.status(500).build();
 		}
 	}

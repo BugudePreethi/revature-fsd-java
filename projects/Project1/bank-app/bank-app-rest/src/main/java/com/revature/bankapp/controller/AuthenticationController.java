@@ -21,26 +21,26 @@ public class AuthenticationController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);
 	private CustomerDao dao = new CustomerDaoImpl();
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response login(Customer credentials, @Context HttpServletRequest request) {
-		LOGGER.info("Start");
-		LOGGER.debug("{}", credentials);
-		LOGGER.debug("Session Id: "+ request.getSession().getId());
-		try {
-			Customer customer = dao.getCustomerByEmail(credentials.getEmail());
-			LOGGER.debug("{}", customer);
-			if (customer == null || !customer.getPassword().equals((credentials.getPassword()))){
-				return Response.status(404).build();
-			}
-			if (customer.getPassword().equals(credentials.getPassword())) {
-				request.getSession().setAttribute("customer", customer);
-				return Response.ok().build();
-			}
-			LOGGER.info("End");
-			return Response.ok().build();
-		} catch (AppException e) {
-			return Response.status(500).build();
-		}
-	}
+//	@POST
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public Response login(Customer credentials, @Context HttpServletRequest request) {
+//		LOGGER.info("Start");
+//		LOGGER.debug("{}", credentials);
+//		LOGGER.debug("Session Id: "+ request.getSession().getId());
+//		try {
+//			Customer customer = dao.getCustomerByEmail(credentials.getEmail());
+//			LOGGER.debug("{}", customer);
+//			if (customer == null || !customer.getPassword().equals((credentials.getPassword()))){
+//				return Response.status(404).build();
+//			}
+//			if (customer.getPassword().equals(credentials.getPassword())) {
+//				request.getSession().setAttribute("customer", customer);
+//				return Response.ok().build();
+//			}
+//			LOGGER.info("End");
+//			return Response.ok().build();
+//		} catch (AppException e) {
+//			return Response.status(500).build();
+//		}
+//	}
 }

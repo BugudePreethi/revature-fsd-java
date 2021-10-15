@@ -11,5 +11,5 @@ public interface EmployeeDao {
 	void create(Employee employee) throws AppException;	
 	Employee getEmployeeByEmail(String email) throws AppException;
 	List<Customer> list() throws AppException;
-	List<Transaction> transactionList() throws AppException;
+	List<Transaction> transactionList(String accountNumber) throws AppException;
 }

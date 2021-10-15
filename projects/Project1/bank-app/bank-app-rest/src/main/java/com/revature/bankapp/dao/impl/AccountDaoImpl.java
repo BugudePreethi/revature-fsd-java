@@ -66,55 +66,6 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		return accountList;
 	}
-
-//	//View balance of specific account
-//	@Override
-//	public double showBalance(int account_id) throws AppException {
-//		double balanceInDB = 0;
-//		try(Connection connection = Util.getConnection()){
-//			String sql = "SELECT balance FROM bankapp.account where id = ?";
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			statement.setInt(1, account_id);
-//			ResultSet resultSet = statement.executeQuery();
-//			if (resultSet.next()) {
-//				balanceInDB = (double) resultSet.getDouble("balance");			
-//			}
-//		} catch(SQLException e) {
-//			LOGGER.error("Error in getting balance", e);
-//			throw new AppException(e);
-//		}
-//		return balanceInDB;
-//	}
-
-	
-	//Approve account 
-	@Override
-	public void approveAccount(String accountNumber) throws AppException {
-		try(Connection connection = Util.getConnection()){
-			String sql ="update account set approved = 'Y' where accountNumber = ?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, "1000014");
-			statement.executeUpdate();
-		} catch(SQLException e) {
-			LOGGER.error("Error approving account", e);
-			throw new AppException(e);
-		}
-	}
-	
-	//Reject Account
-	@Override
-	public void rejectAccount(String accountNumber) throws AppException {
-		try(Connection connection = Util.getConnection()){
-			String sql ="update account set approved = 'R' where accountNumber = ?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setString(1, accountNumber);
-			statement.executeUpdate();
-		} catch(SQLException e) {
-			LOGGER.error("Error rejecting account", e);
-			throw new AppException(e);
-		}
-	}
-	
 	
 	
 }

@@ -28,7 +28,7 @@ export let movies : Movie[] = [
         mpaaRating: mpaaRatings[1],
         rating: 8.5,
         duration: 122,
-        bookingsOpen: true,
+        bookingsOpen: false,
         budget: 70000000,
         favorite: false
     },

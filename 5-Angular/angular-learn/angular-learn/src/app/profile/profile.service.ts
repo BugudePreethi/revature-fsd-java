@@ -23,4 +23,7 @@ export class ProfileService {
     return this.httpClient.post<any>(
       this.addUrl, user, {headers: header});
   }
+  getDepartments(): Observable<any> {
+    return this.httpClient.get<any>("http://localhost:8080/departments");
+  }
 }

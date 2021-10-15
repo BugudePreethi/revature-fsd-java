@@ -10,8 +10,4 @@ public interface AccountDao {
 	void create(Account account) throws AppException;
 	//View Accounts of current customer
 	List<Account> list(int id) throws AppException;
-	//Approve Account
-	void approveAccount(String accountNumber) throws AppException;
-	//Reject Account
-	void rejectAccount(String accountNumber) throws AppException;
 }

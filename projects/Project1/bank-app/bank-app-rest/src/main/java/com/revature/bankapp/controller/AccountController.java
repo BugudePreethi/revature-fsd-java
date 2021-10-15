@@ -45,46 +45,16 @@ public class AccountController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response list(@Context HttpServletRequest request) {
+		//LOGGER.debug("{}", request.getSession().getId());
 		LOGGER.info("View accounts Start");
-		Customer customer = (Customer) request.getSession().getAttribute("customer");
+		//Customer customer = (Customer) request.getSession().getAttribute("customer");
 		List<Account> accountList;
 		try {
-			accountList = dao.list(customer.getId());
+			accountList = dao.list(32);
 			return Response.ok().entity(accountList).build();
 		} catch (AppException e) {
 			return Response.status(500).build();
 		}
 	}
-	
-	//For approving accounts
-	@POST
-	@Path("/approve")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response approveAccount(String accountNumber) {
-		LOGGER.info("Approve accounts Start");
-		LOGGER.debug("{}",accountNumber);
-		try {
-			dao.approveAccount(accountNumber);
-			LOGGER.info("End");
-			return Response.ok().build();
-		} catch(AppException e) {
-			return Response.status(500).build();
-		}
-	} 
-	
-	//For rejecting accounts
-		@POST
-		@Path("/reject")
-		@Consumes(MediaType.APPLICATION_JSON)
-		public Response rejectAccount(String accountNumber) {
-			LOGGER.info("Reject accounts Start");
-			LOGGER.debug("{}",accountNumber);
-			try {
-				dao.approveAccount(accountNumber);
-				LOGGER.info("End");
-				return Response.ok().build();
-			} catch(AppException e) {
-				return Response.status(500).build();
-			}
-		}
+
 }
